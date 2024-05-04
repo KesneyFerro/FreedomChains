@@ -149,20 +149,113 @@ Proposta de valor
 ## Detalhamento de Tecnologias
 <a name="detalhamentoBlockchain"></a>
 ### Blockchain
+No contexto do Sistema Nacional de Administração Penitenciária (SNAP), o sistema de cadastro e verificação de presidiários busca enfrentar desafios relacionados à transparência das informações penais de um detento. Para abordar esses problemas, utiliza-se a tecnologia blockchain como base, possibilitando a criação de um portal transparente para a atualização de dados dos detentos. Por meio da utilização de contratos inteligentes, o owner permite que agentes carcerários autorizados e verificados, por meio da confirmação de identidade e credenciais, adicionem aos detentos seus cadastros de ID iniciais e informações comportamentais capazes de alterar o tamanho previsto da pena. Assim, os dados do histórico criminal de cada detento podem ser coletados pelos agentes e adicionados à blockchain por meio de smart contracts, garantindo a imutabilidade daquela informação e a transparência no processo de monitoramento de pena.
+
+Nessa perspectiva, para implementação desse projeto, foi necessário a criação de um contrato inteligente capaz de armazenar informações de ID, datas de prisão e previsão de encerramento da pena, indicadores de bom/mau comportamento junto a comentários justificando-os. Para isso, foi utilizada a linguagem ``Solidity`` como principal tecnologia, além disso, naturalmente foi necessário deployar esse contrato utilizado utilizando a tecnologia de ``EVM`` por meio do site: https://remix.ethereum.org
+
+O contrato pode ser visualizado abaixo:
+
+```
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+/**
+ * @title PrisonerManagementSystem
+ * @dev This contract manages basic information and behavioral records of prisoners.
+ */
+contract PrisonerManagementSystem {
+    struct PrisonerInfo {
+        uint256 id;
+        uint256 prisonDate;
+        uint256 releaseDate;
+    }
+
+    struct BehaviorRecord {
+        uint256 date;
+        string behavior;
+        string comment;
+    }
+
+    // Mapping of prisoner ID to their basic information
+    mapping(uint256 => PrisonerInfo) public prisonerInfo;
+
+    // Mapping of prisoner ID to the list of behavioral records
+    mapping(uint256 => BehaviorRecord[]) public behaviorRecords;
+
+    // Events
+    event PrisonerInfoRegistered(uint256 indexed prisonerId, uint256 prisonDate, uint256 releaseDate);
+    event BehaviorRecordAdded(uint256 indexed prisonerId, string behavior, string comment);
+
+    /**
+     * @notice Records basic information of a prisoner.
+     * @param _id Prisoner ID.
+     * @param _prisonDate Date of imprisonment as Unix timestamp.
+     * @param _releaseDate Release forecast as Unix timestamp.
+     */
+    function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate) public {
+        require(_id != 0, "ID do presidiario nao pode ser zero.");
+        require(_prisonDate != 0 && _releaseDate != 0, "As datas nao podem ser zero.");
+        require(_releaseDate > _prisonDate, "A data de soltura deve ser posterior a data da prisao.");
+        
+        prisonerInfo[_id] = PrisonerInfo({
+            id: _id,
+            prisonDate: _prisonDate,
+            releaseDate: _releaseDate
+        });
+
+        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate);
+    }
+
+    /**
+     * @notice Records a new behavior for a prisoner.
+     * @param _id Prisoner ID.
+     * @param _behavior Description of the behavior ('good behavior' or 'bad behavior').
+     * @param _comment Comment on the behavior.
+     */
+    function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public {
+        behaviorRecords[_id].push(BehaviorRecord({
+            date: block.timestamp,
+            behavior: _behavior,
+            comment: _comment
+        }));
+
+        emit BehaviorRecordAdded(_id, _behavior, _comment);
+    }
+
+    /**
+     * @notice Retrieves basic information of a prisoner.
+     * @param _id Prisioner ID.
+     * @return Basic prisoner information.
+     */
+    function getPrisonerInfo(uint256 _id) public view returns (PrisonerInfo memory) {
+        return prisonerInfo[_id];
+    }
+
+    /**
+     * @notice Retrieves all behavior records of a specific prisoner.
+     * @param _id Prisioner ID.
+     * @return A list of behavior records.
+     */
+    function getBehaviorRecords(uint256 _id) public view returns (BehaviorRecord[] memory) {
+        return behaviorRecords[_id];
+    }
+}
+```
+
+Ademais, foi escolhida a MetaMask como tecnologia de carteira digital, servindo como um meio para o deployment diretamente na rede de teste da Scroll. Dentro do projeto, atua ainda como um gateway para permitir aos usuários interagir com a Ethereum blockchain diretamente de seus navegadores web. É uma ferramenta essencial para facilitar o acesso seguro, fornecendo uma interface de usuário amigável para autenticar os deploys. Isso simplifica significativamente a interação dos agentes carcerários com o sistema, permitindo que eles realizem transações e consultas sem necessitar de conhecimento técnico profundo sobre smart contracts ou blockchain.
+
+Em suma, a implementação do sistema de cadastro e monitoramento de presidiários dentro do contexto do Sistema Nacional de Administração Penitenciária (SNAP) demonstra como a tecnologia blockchain, aliada a contratos inteligentes e uma interface amigável como a MetaMask, pode revolucionar a transparência e eficiência na gestão penitenciária. Ao fornecer um portal transparente para atualização de dados dos detentos e registrar comportamentos através de smart contracts, o sistema promove a imutabilidade das informações e a integridade do histórico criminal de cada preso. Isso não apenas simplifica o processo de monitoramento de pena, mas também aumenta a confiança na administração prisional ao garantir uma abordagem mais justa e transparente. Em última análise, essa iniciativa representa um avanço significativo na modernização do sistema carcerário, visando uma gestão mais eficaz e humanizada.
+
 
 <a name="ondeOlharNoCodigo"></a>
 ## Onde Olhar no Código
 
 ### Scroll
 
-Contrato: 0xaF26145d3c11c81fbC950806cbe86F725D783c9b<br/>
-Link do contrato no [Scroll Etherscan](https://sepolia.scrollscan.dev/address/0xaF26145d3c11c81fbC950806cbe86F725D783c9b)
+Contrato: 0xdF0e1E6101ec169Bd9d7D30ADFfB9a28cE6E2B41<br/>
+Link do contrato no [Scroll Etherscan](https://sepolia.scrollscan.com/address/0xdF0e1E6101ec169Bd9d7D30ADFfB9a28cE6E2B41)
 
-Participamos das categorias:
-- Non-Financial Track:
-- General Track:
-
-No nosso código implementamos Scroll em:
+A Scroll é uma plataforma blockchain notavelmente eficiente, que se destaca pela sua viabilidade operacional. Optamos pela Scroll como alicerce do nosso projeto devido à sua rede extremamente estável e aos custos de gas fee reduzidos, elementos cruciais para uma implementação viável e prática em cenários da vida real. Esta escolha estratégica assegura que nossa aplicação seja não apenas sustentável, mas também amplamente acessível, democratizando o acesso a tecnologias de ponta em sistemas críticos de administração pública e garantindo uma solução inovadora que promete transformar a maneira como interagimos com infraestruturas estatais vitais.
 
 ### BuidlGuidl
 
