@@ -83,13 +83,13 @@ A análise SWOT é uma ferramenta estratégica utilizada para avaliar os pontos 
 
 <div align="center">
 <sub><a name="f2"></a>Análise SWOT (PT)</sub>
-<img src="../Assets/assets/PT-SWOT.png" width="100%">
+<img src="assets/PT-SWOT.png" width="100%">
 <sup>Fonte: Material produzido pelos autores (2024)</sup>
 </div>
 
 <div align="center">
 <sub><a name="f2"></a>Análise SWOT (EN)</sub>
-<img src="../Assets/assets/EN-SWOT.png" width="100%">
+<img src="assets/EN-SWOT.png" width="100%">
 <sup>Fonte: Material produzido pelos autores (2024)</sup>
 </div>
 
@@ -127,13 +127,13 @@ O Canva de Proposta de Valor é uma ferramenta visual e estratégica utilizada p
 
 <div align="center">
 <sub><a name="f2"></a>Análise SWOT (PT)</sub>
-<img src="../Assets/assets/PT-ValuePropositionCanvas.png" width="100%">
+<img src="assets/PT-ValuePropositionCanvas.png" width="100%">
 <sup>Fonte: Material produzido pelos autores (2024)</sup>
 </div>
 
 <div align="center">
 <sub><a name="f2"></a>Análise SWOT (PT)</sub>
-<img src="../Assets/assets/EN-ValuePropositionCanvas.png" width="100%">
+<img src="assets/EN-ValuePropositionCanvas.png" width="100%">
 <sup>Fonte: Material produzido pelos autores (2024)</sup>
 </div>
 
