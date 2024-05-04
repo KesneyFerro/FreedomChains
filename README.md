@@ -81,7 +81,17 @@ Portanto, mais do que apenas eficiência técnica, essa solução reflete um com
 
 A análise SWOT é uma ferramenta estratégica utilizada para avaliar os pontos fortes (Strengths), pontos fracos (Weaknesses), oportunidades (Opportunities) e ameaças (Threats) de uma empresa, projeto ou situação específica. Ela serve para fornecer uma visão abrangente do ambiente interno e externo de uma organização, permitindo identificar áreas de melhoria, vantagens competitivas, potenciais riscos e oportunidades de crescimento. A análise SWOT é importante porque ajuda na formulação de estratégias mais eficazes, na tomada de decisões informadas e no desenvolvimento de planos de ação que aproveitem os pontos fortes da organização e minimizem suas fraquezas, ao mesmo tempo em que buscam aproveitar as oportunidades e mitigar as ameaças do ambiente externo. Dado essa importância, segue a análise SWOT da Freedom Chains na Figura 1:
 
-[IMAGENS]
+<div align="center">
+<sub><a name="f2"></a>Análise SWOT (PT)</sub>
+<img src="../Assets/assets/PT-SWOT.png" width="100%">
+<sup>Fonte: Material produzido pelos autores (2024)</sup>
+</div>
+
+<div align="center">
+<sub><a name="f2"></a>Análise SWOT (EN)</sub>
+<img src="../Assets/assets/EN-SWOT.png" width="100%">
+<sup>Fonte: Material produzido pelos autores (2024)</sup>
+</div>
 
 **Forças:**
 - Segurança e Imutabilidade dos Dados: Utilizando a blockchain Scroll, o sistema garante que os dados sejam armazenados de forma segura e permanente, sem possibilidade de alteração ou adulteração.
@@ -115,7 +125,17 @@ Em conclusão, embora haja desafios a serem superados, a FreedomChains está bem
 
 O Canva de Proposta de Valor é uma ferramenta visual e estratégica utilizada para o desenvolvimento de produtos, soluções e projetos. Essa utilidade tem foco em garantir que uma solução proposta atenda às necessidades e desejos dos clientes. Ela ajuda a mapear e entender os benefícios que a solução proposta devem oferecer para atender as solicitações do cliente e criar ganhos significativos para eles.
 
-[IMAGENS]
+<div align="center">
+<sub><a name="f2"></a>Análise SWOT (PT)</sub>
+<img src="../Assets/assets/PT-ValuePropositionCanvas.png" width="100%">
+<sup>Fonte: Material produzido pelos autores (2024)</sup>
+</div>
+
+<div align="center">
+<sub><a name="f2"></a>Análise SWOT (PT)</sub>
+<img src="../Assets/assets/EN-ValuePropositionCanvas.png" width="100%">
+<sup>Fonte: Material produzido pelos autores (2024)</sup>
+</div>
 
 **Na seção "Segmentos de Clientes", os três principais componentes apresentados buscam trazer o papel do cliente no modelo de negócios atual e como a solução pode impacta-lo.**
 
