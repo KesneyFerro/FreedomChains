@@ -5,10 +5,11 @@ from dotenv import dotenv_values
 enviroment = dotenv_values(".env")
 
 # Function that creates requests to chat gpt, passing the prompt
-def ask_to_ai(prompt):
+def ask_to_ai(prompt, context_type = "", context = ""):
 
-    context = """
-Você vai receber um comentário de um agente penitenciário, informando ações positivas de um detento, você deve elencar os índices de bom comportamento, e as seguintes participações em atividades de ressocialização:
+    if context_type.strip().lower() == "comentario":
+        context = """
+Você vai receber um comentário de um agente penitenciário, informando ações positivas e/ou negativas de um detento, você deve elencar os índices de bom comportamento e mau comportamento, e as seguintes participações em atividades de ressocialização:
 
 Atividade 1: Leitura de livros e criação de relatórios
 Remição de pena: Cada obra lida corresponderá à remição de quatro dias de pena, limitando-se, no prazo de 12 meses, a até 12 obras efetivamente lidas e avaliadas, assegurando-se a possibilidade de remir até 48 dias a cada período de 12 meses.
@@ -23,10 +24,16 @@ Preciso que você me retorne um JSON com suas respostas, separados da seguinte m
 
 {
     "comentario": "comentário passado",
-    "indices": [
+    "data_comentario": "data do comentario no modelo dd/mm/yyyy",
+    "indices_bom_comportamento": [
         "indice de bom comportamento 1",
         "indice de bom comportamento 2",
         "indice de bom comportamento 3"
+    ],
+    "indices_mau_comportamento": [
+        "indice de mau comportamento 1",
+        "indice de mau comportamento 2",
+        "indice de mau comportamento 3"
     ],
     "atividades_ressocializacao": {
         "leitura": {
@@ -45,8 +52,18 @@ Preciso que você me retorne um JSON com suas respostas, separados da seguinte m
 }
 
 Por favor, me retorne única e exclusivamente o JSON, e mais nada.
+Preciso que você faça o comentário de 4 comentários diferentes e retorne os 4 comentários dentro de um JSON maior, por favor faça 2 comentários positivos e 2 comentários negativos.
 """
-    
+    elif context_type.strip().lower() == "relatorio":
+        context = """Você vai receber diversos comentários feitos por agentes penitenciários indicando ações de um detento ao longo do tempo. Você deve analisar cada um dos comentários e gerar um relatório com as informações apresentadas. Separe e cite todos os comportamentos ruins e comportamentos bons do detento, separe o total de ações de ressocialização que ele fez (leituras, estudos e trabalho).
+        O relatório deve ter 4 seções, sendo elas:
+        1 - Lista de comportamentos ruins, com a data do comentário referente
+        2 - Lista de recorrências de comportamentos ruins, ou seja, liste todos os comportamentos ruins que são recorrentes e acontecem mais de uma vez, caso o comportamento tenha a frequência de apenas uma vez, não coloque nesta lista
+        3 - Lista de comportamentos bons, com a data do comentário referente
+        4 - Lista de recorrências de comportamentos bons, ou seja, liste todos os comportamentos bons que são recorrentes e acontecem mais de uma vez, caso o comportamento tenha a frequência de apenas uma vez, não coloque nesta lista
+        5 - Ações de ressocialização
+        
+        OBS: As seções 1, 2, 3 e 4 devem vir em forma de tabela markdown"""
 
     client = OpenAI(
         api_key = enviroment["API_KEY"],

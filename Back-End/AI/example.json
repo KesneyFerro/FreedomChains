@@ -1,9 +1,15 @@
 {
     "comentario": "comentário passado",
-    "indices": [
+    "data_comentario": "data do comentario no modelo dd/mm/yyyy",
+    "indices_bom_comportamento": [
         "indice de bom comportamento 1",
         "indice de bom comportamento 2",
         "indice de bom comportamento 3"
+    ],
+    "indices_mau_comportamento": [
+        "indice de mau comportamento 1",
+        "indice de mau comportamento 2",
+        "indice de mau comportamento 3"
     ],
     "atividades_ressocializacao": {
         "leitura": {
