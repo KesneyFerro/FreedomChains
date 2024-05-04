@@ -2,13 +2,14 @@
 
 🧪 Uma atualização para a fila de espera de doação de orgãos. Visualize de forma transparente, segura e anônima a sua posição na fila de espera de doação de órgãos, além dos critérios de classificação para o seu posicionamento.
 
-⚙️ Solução desenvolvida usando NextJS, RainbowKit, Hardhat, ReactJs, Typescript, Scroll
+⚙️ Solução desenvolvida usando NextJS, ReactJs, Typescript, Scroll
 
 ## Índice
 
 - 🌐 [Cenário Geral](#cenarioGeral): Uma perspectiva do cenário geral do sistema carcerário no Brasil.
 - 🎯 [Nossa Ideia](#nossaIdeia): A partir da perspectiva geral, como a Freedom Chains pretender garantir um processo penal justo e humanitário. 
 - 📈 [Análise de Mercado](#analiseDeMercado): Entendendo a extensão do mercado e como podemos, por meio das necessidades desse mercado gerar impacto social.
+- 💻 [Detalhamento de Tecnologias](#detalhamentoDeTecnologias): Uma visão mais aprofundada das tecnologias utilizadas no desenvolvimento do projeto 
 - 👁️ [Onde olhar no código](#ondeOlharNoCodigo): Um guia de inspeção focado em orientar o revisor para cada uma das *bounties*.
 - 😎 [Nossa Equipe](#nossaEquipe): Conheça os nossos membros.
 
@@ -17,15 +18,23 @@
 
 ## Cenário Geral
 
-No panorama global, o transplante de órgãos é uma área complexa e crucial da medicina, salvando vidas e melhorando a qualidade de vida de milhões de pessoas em todo o mundo. No entanto, o acesso a transplantes muitas vezes é limitado por uma série de fatores, incluindo a disponibilidade de órgãos, sistemas de listagem e distribuição, e a capacidade de infraestrutura médica.
+O sistema carcerário brasileiro é um tema complexo e multifacetado, que suscita debates sobre justiça, direitos humanos e eficácia das políticas públicas. Com uma população carcerária que figura entre as maiores do mundo, o Brasil enfrenta desafios significativos relacionados à superlotação, violência, reincidência criminal e acesso adequado a direitos básicos dos detentos.
 
-No Brasil, o Sistema Nacional de Transplantes (SNT) é o órgão do Ministério da Saúde que desempenha o papel fundamental de coordenação e regulação dos transplantes de órgãos brasileiros. O SNT é responsável por garantir que os órgãos sejam alocados de forma justa e eficiente, levando em consideração [critérios médicos](https://bvsms.saude.gov.br/bvs/saudelegis/gm/2017/prc0004_03_10_2017.html), éticos e legais. Este sistema visa garantir que os órgãos sejam distribuídos de acordo com a gravidade do caso e a compatibilidade entre doador e receptor.
+Neste contexto, é crucial analisar e compreender os dados relacionados aos detentos no país, a fim de identificar tendências, desafios e oportunidades de melhoria no sistema prisional. Dessa forma, é possível apresentar uma visão geral dos números e estatísticas mais recentes sobre a população carcerária brasileira, incluindo informações sobre o perfil demográfico dos detentos, o tempo médio de prisão, a incidência de prisão provisória e outras questões relevantes para o debate sobre o sistema de justiça criminal no Brasil.
 
-Na atualidade, mais de [68,2 mil pacientes estão na lista de espera](https://brasil61.com/n/mais-de-66-mil-brasileiros-na-fila-a-espera-de-um-transplante-bras239634) (2023) aguardando por um órgão compatível. Visto que essa lista é dinâmica e varia de acordo com a oferta de órgãos e a gravidade das condições de saúde dos pacientes, ela apresenta um avanço gradual, de maneira que o tempo de espera vaira consideravelmente de acordo com a região e a especificidade do órgão necessário.
+Em relação aos detentos, conforme o [Relatório de Informações Penais de 2023.2 (RELIPEN)](https://www.gov.br/senappen/pt-br/servicos/sisdepen/relatorios/relipen/relipen-2-semestre-de-2023.pdf), cerca de 40% de todos os presidiários do Brasil são presos provisórios, ou seja, ainda não foram julgados e sentenciados, logo estão presos de forma provisória e por tempo indeterminado. Quando falamos de detentos condenados, as maiores parcelas de detentos possuem pena total entre 20 e 100 anos de pena, desses, grande parte ainda precisa cumprir mais de 20 anos de cadeia.
+Além disso, é válido mencionar que, de acordo com a legislação brasileira, os detentos condenados só podem cumprir no máximo 30 anos de cadeia, independente do tempo de pena a qual eles foram condenados.
 
-Um dos maiores desafios enfrentados pelos pacientes e suas famílias durante esse processo é a incerteza. Como exemplificado pelo relato dado à SALVO pela Simone, mãe da Élida, "o processo de espera por um órgão pode ser angustiante e emocionalmente desgastante". A falta de informações precisas sobre a posição na lista e o tempo de espera pode gerar ansiedade e insegurança. Além disso, a necessidade de depender da generosidade de outra família em um momento de perda torna o processo ainda mais delicado. Ainda no relato de Simone, ela evidencia que "não é divulgado a lista pra gente, mas o médico, como foi ele que solicitou a córnea, ele sabe", de modo que, denota-se uma característica alarmante do SNF: privação de acesso a informação.
+É válido pontuar que existem dois tipos de prisão provisória: a prisão preventiva e a prisão temporária. A prisão preventiva é decretada durante o curso do processo criminal, antes do julgamento final do réu. Ela visa garantir a ordem pública, a conveniência da instrução criminal ou a aplicação da lei penal. Geralmente, é utilizada quando há indícios de que o acusado possa obstruir a investigação, fugir da justiça ou representar um risco à sociedade. Por outro lado, a prisão temporária é uma medida cautelar mais específica, decretada em casos específicos e por um prazo determinado de até 90 dias, prorrogável em casos excepcionais. Ela é aplicada durante a fase de investigação, permitindo que a autoridade policial reúna provas e esclareça os fatos. Ambos os tipos de prisão provisória são regulamentados por leis específicas e devem ser utilizados de forma criteriosa e proporcional, respeitando os direitos fundamentais dos acusados.
 
-Assim, a falta de transparência na divulgação das posições na lista de espera também pode ser um ponto de preocupação. Como mencionado por Simone, o desconhecimento sobre a posição na lista pode causar confusão e frustração, especialmente quando há uma percepção de que o sistema não está funcionando de maneira justa. Isso porque, em uma análise crítica, quando observa-se [casos como o de Fausto Silva (Faustão)](https://oglobo.globo.com/saude/medicina/noticia/2023/08/28/faustao-furou-a-fila-do-transplante-entenda-por-que-apresentador-recebeu-o-orgao-tao-rapido.ghtml), percebe-se que não existem mecanismos de verificação desse sistema, de forma que cabe ao paciente, em situação de angústia, apenas confiar que não haverão corrupções no sistema.
+Como forma de programas de reabilitação de detentos, existem 3 formas de diminuir a pena de um detento através de ações educacionais e benéficas ao detento, primeiramente, caso o detento leia um livro e escreva um relatório sobre, ele recebe uma remição de pena de 3 dias, caso ele estude, a cada 12 horas de estudo ele recebe uma remição de pena de 1 dia, e caso ele trabalhe, a cada 2 dias de trabalho ele recebe uma remição de pena de 1 dia.
+
+No Brasil, o sistema carcerário enfrenta desafios significativos que merecem nossa atenção e ação. Em vez de ser um ambiente de reabilitação e justiça, muitas vezes as prisões se tornam locais de privação de direitos e perpetuação de injustiças. É essencial reconhecer que os programas de reabilitação nem sempre estão adequados, priorizando a punição em detrimento do desenvolvimento pessoal do detento e sua preparação para reintegração na sociedade. Isso pode contribuir para um ciclo preocupante de reincidência criminal após a soltura.
+
+Além disso, é crucial abordar fatores como a falta de programas eficazes de reabilitação social, desigualdade e discriminação, que contribuem para o ciclo de criminalidade. Sem ações significativas para reintegrar os detentos na sociedade, é provável que muitos acabem retornando ao crime após a libertação.
+
+Em resumo, é necessário realizar uma revisão abrangente do sistema carcerário brasileiro, com foco na redução da reincidência criminal, na melhoria das condições de vida nas prisões e na promoção da reabilitação e reinserção social dos detentos. Isso inclui medidas como acesso à educação e oportunidades de trabalho, incentivando uma transição bem-sucedida de volta à sociedade.
+
 </br>
 <a name="nossaIdeia"></a>
 
@@ -47,8 +56,16 @@ Em síntese, os desafios apresentados no sistema carcerário brasileiro evidenci
 
 ### Solução
 
+No contexto do sistema carcerário do Brasil, o Freedom Chains busca assegurar que o processo de ressocialização para presidiários seja mais humanizado e transparente visando remover possívels viéses. Para abordar esses problemas, utiliza-se de tecnologias blockchain como base, possibilitando a criação de um portal transparente para a vizualização de tempo restante de cumprimento de pena, históricos de comportamento e indicadores de reabilitação para futuros audiências. Por meio da criação de smart contracts, o sistema da Freedom Chains, adiciona identificadores únicos para cada preso e associa a eles smart contracts de comportamento que carregam relatórios feitos por agentes carcerários para indicar o bom e mau comportamento de um preso visando construir um relatório que servirá como indicador de aptidão a ressocialização.
 
+Nessa solução, a [utilização de blockchain para a resolução do problema](#detalhamentoBlockchain) se baseia em três pilares dessa tecnologia: transparência, imutabilidade e descentralização. Por meio da blockchain, é possível garantir a integridade dos processos de avaliação do engajamento do preso com o processo de reabilitação, uma vez que, por meio, de relatórios que indicam a vivência no cárcere, permite-se a verificação da validade e congruência do processo avaliativo de pena. Assim, a utilização de uma ferramenta de descentralização favorece a diminuição da corrupção sistemática no cárcere brasileiro, ao passo que garante maior agilidade nos processos de audiência, visto que os relatórios permitem uma análise mais fundamentada do caso em questão.
 
+Para garantir que os relatórios facilitem o processo de análise pelo juizado, utilizam-se modelos de LLM para converter os relatórios de bons e maus comportamentos associados a um preso em um novo relatório que agrupa comentários e sintetiza o progresso de ressocialização do encarcerado por meio de marcadores. Dessa maneira, o modelo de LLM converte dados onchain em marcadores analíticos que facilitam a análise do perfil do preso e compõem um dociê comportamental para diferentes instâncias de julgamento de diminuição ou aumento de pena. 
+
+Assim, a solução proposta pelo Freedom Chains emerge como uma resposta poderosa aos desafios enfrentados pelo sistema carcerário brasileiro. Ao empregar tecnologias blockchain e modelos analíticos avançados, essa plataforma busca não apenas mitigar preconceitos e combater a corrupção, mas também garantir a transparência e a justiça no processo de ressocialização dos detentos. Com essa abordagem inovadora, oferecendo uma ferramenta para acompanhar de forma transparente o cumprimento de penas e o progresso de reabilitação dos presos, o Freedom Chains possibilita uma análise mais embasada e imparcial por parte dos juizados. Isso, por sua vez, reduz as injustiças e assegura que as penas sejam aplicadas de maneira justa e proporcional, fortalecendo os alicerces do sistema judicial. 
+
+Portanto, mais do que apenas eficiência técnica, essa solução reflete um compromisso profundo com os princípios de justiça, respeito aos direitos humanos e dignidade de todos os indivíduos, independentemente de sua situação de encarceramento. Ao promover a transparência, a imparcialidade e a eficácia do sistema judiciário, o Freedom Chains contribui de forma significativa para a construção de uma sociedade mais justa e inclusiva. Em seu cerne, está a crença de que cada pessoa merece a oportunidade de buscar sua reintegração à comunidade de forma digna e equitativa.
+ 
 <a name="analiseDeMercado"></a>
 ## Análise de Mercado
 
@@ -127,6 +144,11 @@ Proposta de valor
 1. Software que possibilita a automatização
 2. Plataforma online para gerenciamento centralizado de listas de espera em relação ao transplante de órgãos
 3. Ferramentas de comunicação integradas para facilitar a interação entre hospitais, centros de transplante e pacientes.
+
+<a name="detalhamentoDeTecnologias"></a>
+## Detalhamento de Tecnologias
+<a name="detalhamentoBlockchain"></a>
+### Blockchain
 
 <a name="ondeOlharNoCodigo"></a>
 ## Onde Olhar no Código
