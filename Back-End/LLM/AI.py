@@ -129,7 +129,7 @@ Preciso que você faça o comentário de 4 comentários diferentes e retorne os 
         api_key = enviroment["API_KEY"],
         base_url = "https://api.openai.com/v1",
         default_headers={
-            "Authorization": f"Bearer {enviroment["API_KEY"]}"
+            "Authorization": f"Bearer {enviroment['API_KEY']}"
         }
     )
 
