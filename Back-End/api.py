@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 from LLM.AI import generate_guard_comments, generate_detainee_report
 from LLM.markdown_to_pdf import convert_to_pdf
 from pydantic import BaseModel
@@ -10,6 +11,16 @@ class MyData(BaseModel):
     historico: list
 
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/historico/json")
 async def get_historico_json(data: MyData):
