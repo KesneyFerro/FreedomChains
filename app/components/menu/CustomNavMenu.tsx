@@ -1,3 +1,8 @@
+"use client";
+
+import { abiData } from "@/app/abis/abi";
+import { useReadContract } from "wagmi";
+
 export default function CustomNavMenu({
   menuNames,
   selectIndex,
@@ -7,19 +12,56 @@ export default function CustomNavMenu({
   selectIndex: number;
   setSelectedIndex: (index: number) => void;
 }) {
+  const {
+    data: prisioneiros,
+    error,
+    isPending,
+  } = useReadContract({
+    abi: abiData,
+    address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
+    functionName: "getAllPrisonerDetails",
+    chainId: 534351,
+    args: [],
+  });
+
   return (
     <div className="mt-5 w-full flex flex-col shadow-lg overflow-hidden border-4 bg-[#f7f6f7]  border-white rounded-xl">
       <div className="z-[2] w-full flex gap-x-5 drop-shadow-md justify-between items-center rounded-t-lg  rounded-b-lg bg-white px-6 py-5">
         <div className="flex  flex-col">
-          <h3 className="font-semibold text-black">8943</h3>
+          <h3 className="font-semibold text-black">
+            {(prisioneiros as any[])?.length || "---"}
+          </h3>
           <span className="text-gray-500">Detentos Registrados</span>
         </div>
         <div className="flex  flex-col">
-          <h3 className="font-semibold text-black">349</h3>
+          <h3 className="font-semibold text-black">
+            {
+              // filter the prisoners that have a release date that is less than 1 month
+              (prisioneiros as any[])?.filter((prisioneiro) => {
+                const finalDate = new Date(
+                  Number((prisioneiro as any)?.releaseDate) * 1000 || 0
+                );
+                const difference =
+                  finalDate.getTime() -
+                  new Date(
+                    new Date().setDate(new Date().getDate() - 1)
+                  ).getTime();
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const months = Math.floor(days / 30);
+                return months <= 1 && days > 0;
+              }).length || "---"
+            }
+          </h3>
           <span className="text-gray-500">Próximos Liberados</span>
         </div>
         <div className="flex flex-col">
-          <h3 className="font-semibold text-black">2</h3>
+          <h3 className="font-semibold text-black">
+            {(prisioneiros as any[])?.filter(
+              (prisioneiro) =>
+                new Date(Number(prisioneiro.releaseDate) * 1000).getTime() <
+                new Date(new Date().setDate(new Date().getDate() - 1)).getTime()
+            ).length || "---"}
+          </h3>
           <span className="text-gray-500">Detentos Liberados</span>
         </div>
       </div>

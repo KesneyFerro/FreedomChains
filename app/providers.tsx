@@ -3,6 +3,7 @@
 import { config } from "@/config";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { type State, WagmiProvider } from "wagmi";
+import { NextUIProvider } from "@nextui-org/react";
 
 export default function Providers({
   children,
@@ -15,7 +16,9 @@ export default function Providers({
 
   return (
     <WagmiProvider config={config} initialState={initialState}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>
+        <NextUIProvider>{children}</NextUIProvider>
+      </QueryClientProvider>
     </WagmiProvider>
   );
 }

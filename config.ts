@@ -1,5 +1,5 @@
 import { http, createConfig, createStorage, cookieStorage } from "wagmi";
-import { mainnet, scrollSepolia } from "wagmi/chains";
+import { scrollSepolia } from "wagmi/chains";
 import { injected } from "wagmi/connectors";
 
 export const config = createConfig({

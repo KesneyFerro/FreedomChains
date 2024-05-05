@@ -1,29 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 export const abiData = [
   {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "_id",
-        type: "uint256",
-      },
-      {
-        internalType: "string",
-        name: "_behavior",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "_comment",
-        type: "string",
-      },
-    ],
-    name: "addBehaviorRecord",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
     inputs: [],
     stateMutability: "nonpayable",
     type: "constructor",
@@ -68,24 +45,6 @@ export const abiData = [
     ],
     name: "AuthorizationUpdated",
     type: "event",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_agent",
-        type: "address",
-      },
-      {
-        internalType: "bool",
-        name: "_isAuthorized",
-        type: "bool",
-      },
-    ],
-    name: "authorizeAgent",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
   },
   {
     anonymous: false,
@@ -171,6 +130,18 @@ export const abiData = [
         name: "isDetained",
         type: "bool",
       },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "createdBy",
+        type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bytes32",
+        name: "transactionHash",
+        type: "bytes32",
+      },
     ],
     name: "PrisonerInfoRegistered",
     type: "event",
@@ -183,29 +154,17 @@ export const abiData = [
         type: "uint256",
       },
       {
-        internalType: "uint256",
-        name: "_prisonDate",
-        type: "uint256",
+        internalType: "string",
+        name: "_behavior",
+        type: "string",
       },
       {
-        internalType: "uint256",
-        name: "_releaseDate",
-        type: "uint256",
-      },
-      {
-        internalType: "bool",
-        name: "_isDetained",
-        type: "bool",
+        internalType: "string",
+        name: "_comment",
+        type: "string",
       },
     ],
-    name: "registerPrisonerInfo",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
+    name: "addBehaviorRecord",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -214,11 +173,16 @@ export const abiData = [
     inputs: [
       {
         internalType: "address",
-        name: "newOwner",
+        name: "_agent",
         type: "address",
       },
+      {
+        internalType: "bool",
+        name: "_isAuthorized",
+        type: "bool",
+      },
     ],
-    name: "transferOwnership",
+    name: "authorizeAgent",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function",
@@ -278,12 +242,70 @@ export const abiData = [
   },
   {
     inputs: [],
+    name: "getAllPrisonerDetails",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "uint256",
+            name: "id",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "prisonDate",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
+            name: "releaseDate",
+            type: "uint256",
+          },
+          {
+            internalType: "bool",
+            name: "isDetained",
+            type: "bool",
+          },
+          {
+            internalType: "address",
+            name: "createdBy",
+            type: "address",
+          },
+          {
+            internalType: "bytes32",
+            name: "transactionHash",
+            type: "bytes32",
+          },
+        ],
+        internalType: "struct PrisonerManagementSystem.PrisonerInfo[]",
+        name: "",
+        type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
     name: "getAllPrisonerIDs",
     outputs: [
       {
         internalType: "uint256[]",
         name: "",
         type: "uint256[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "getAuthorizedAddresses",
+    outputs: [
+      {
+        internalType: "address[]",
+        name: "",
+        type: "address[]",
       },
     ],
     stateMutability: "view",
@@ -357,6 +379,16 @@ export const abiData = [
             name: "isDetained",
             type: "bool",
           },
+          {
+            internalType: "address",
+            name: "createdBy",
+            type: "address",
+          },
+          {
+            internalType: "bytes32",
+            name: "transactionHash",
+            type: "bytes32",
+          },
         ],
         internalType: "struct PrisonerManagementSystem.PrisonerInfo",
         name: "",
@@ -409,8 +441,66 @@ export const abiData = [
         name: "isDetained",
         type: "bool",
       },
+      {
+        internalType: "address",
+        name: "createdBy",
+        type: "address",
+      },
+      {
+        internalType: "bytes32",
+        name: "transactionHash",
+        type: "bytes32",
+      },
     ],
     stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_id",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_prisonDate",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
+        name: "_releaseDate",
+        type: "uint256",
+      },
+      {
+        internalType: "bool",
+        name: "_isDetained",
+        type: "bool",
+      },
+    ],
+    name: "registerPrisonerInfo",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "newOwner",
+        type: "address",
+      },
+    ],
+    name: "transferOwnership",
+    outputs: [],
+    stateMutability: "nonpayable",
     type: "function",
   },
 ];

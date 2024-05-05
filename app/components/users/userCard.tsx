@@ -16,16 +16,22 @@ export default function UserCard({ prisonerId, selectedMenu }: UserCardProps) {
     isPending,
   } = useReadContract({
     abi: abiData,
-    address: "0xE6480Bd963438fc845eFaA7497e8Fc0C5ab93516",
+    address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
     functionName: "getPrisonerInfo",
     chainId: 534351,
     args: [prisonerId],
   });
 
   const howLongUntilRelease = () => {
-    const initialDate = new Date(Number((prisioneiro as any)?.prisonDate) || 0);
-    const finalDate = new Date(Number((prisioneiro as any)?.releaseDate) || 0);
-    const difference = finalDate.getTime() - initialDate.getTime();
+    const initialDate = new Date(
+      Number((prisioneiro as any)?.prisonDate) * 1000 || 0
+    );
+    const finalDate = new Date(
+      Number((prisioneiro as any)?.releaseDate) * 1000 || 0
+    );
+    const difference =
+      finalDate.getTime() -
+      new Date(new Date().setDate(new Date().getDate() - 1)).getTime();
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const months = Math.floor(days / 30);
     const years = Math.floor(months / 12);
@@ -36,86 +42,46 @@ export default function UserCard({ prisonerId, selectedMenu }: UserCardProps) {
     if (months > 0) {
       return [`${months} ${months === 1 ? "mês" : "meses"}`, false];
     }
-    return [`${days} ${days === 1 ? "dia" : "dias"}`, days <= 0];
+    return [
+      `${Math.abs(days)} ${Math.abs(days) === 1 ? "dia" : "dias"}`,
+      days <= 0,
+    ];
   };
 
-  console.log(selectedMenu);
-
-  if (selectedMenu === 0)
-    return (
-      <Link
-        href={`/detento/${prisonerId}`}
-        passHref
-        className={`${
-          howLongUntilRelease()[1] ? "bg-[#9006a7]" : "bg-white"
-        }  cursor-pointer drop-shadow-md   rounded-lg flex justify-between items-center py-3 px-5 w-full gap-y-5`}
-      >
-        <div className="flex flex-col gap-y-1">
-          <h4
-            className={`${
-              howLongUntilRelease()[1] ? "text-white" : "text-[#9006a7]"
-            }  font-semibold`}
-          >
-            Detento {prisonerId.toString()}
-          </h4>
-          <h3
-            className={`text-sm ${
-              howLongUntilRelease()[1]
-                ? "text-gray-200 font-light"
-                : "text-gray-400"
-            }`}
-          >
-            {"0xb7D3F862ebBed6C5E61B76e407ce28ea16aD1289".slice(0, 16)}...
-          </h3>
-        </div>
-        <div
-          className={`flex flex-col gap-y-1 font-medium  px-4  py-1.5 rounded-md text-center leading-tight text-[#9006a7] ${
-            howLongUntilRelease()[1] ? "bg-[#fff]" : "bg-[#f8cbff]"
+  return (
+    <Link
+      href={`/detento/${prisonerId}`}
+      passHref
+      className={`${
+        howLongUntilRelease()[1] ? "bg-[#9006a7]" : "bg-white"
+      }  cursor-pointer drop-shadow-md   rounded-lg flex justify-between items-center py-3 px-5 w-full gap-y-5`}
+    >
+      <div className="flex flex-col gap-y-1">
+        <h4
+          className={`${
+            howLongUntilRelease()[1] ? "text-white" : "text-[#9006a7]"
+          }  font-semibold`}
+        >
+          Detento {prisonerId.toString()}
+        </h4>
+        <h3
+          className={`text-sm ${
+            howLongUntilRelease()[1]
+              ? "text-gray-200 font-light"
+              : "text-gray-400"
           }`}
         >
-          <h4>{howLongUntilRelease()[1] ? "Liberado há:" : "Saída em:"}</h4>
-          <h3>{howLongUntilRelease()[0]}</h3>
-        </div>
-      </Link>
-    );
-
-  if (selectedMenu === 2 && howLongUntilRelease()[1])
-    return (
-      <Link
-        href={`/detento/${prisonerId}`}
-        passHref
-        className={`${
-          howLongUntilRelease()[1] ? "bg-[#9006a7]" : "bg-white"
-        }  cursor-pointer drop-shadow-md   rounded-lg flex justify-between items-center py-3 px-5 w-full gap-y-5`}
+          {(prisioneiro as any)?.createdBy.slice(0, 16)}...
+        </h3>
+      </div>
+      <div
+        className={`flex flex-col gap-y-1 font-medium  px-4  py-1.5 rounded-md text-center leading-tight text-[#9006a7] ${
+          howLongUntilRelease()[1] ? "bg-[#fff]" : "bg-[#f8cbff]"
+        }`}
       >
-        <div className="flex flex-col gap-y-1">
-          <h4
-            className={`${
-              howLongUntilRelease()[1] ? "text-white" : "text-[#9006a7]"
-            }  font-semibold`}
-          >
-            Detento {prisonerId.toString()}
-          </h4>
-          <h3
-            className={`text-sm ${
-              howLongUntilRelease()[1]
-                ? "text-gray-200 font-light"
-                : "text-gray-400"
-            }`}
-          >
-            {"0xb7D3F862ebBed6C5E61B76e407ce28ea16aD1289".slice(0, 16)}...
-          </h3>
-        </div>
-        <div
-          className={`flex flex-col gap-y-1 font-medium  px-4  py-1.5 rounded-md text-center leading-tight text-[#9006a7] ${
-            howLongUntilRelease()[1] ? "bg-[#fff]" : "bg-[#f8cbff]"
-          }`}
-        >
-          <h4>{howLongUntilRelease()[1] ? "Liberado há:" : "Saída em:"}</h4>
-          <h3>{howLongUntilRelease()[0]}</h3>
-        </div>
-      </Link>
-    );
-
-  return <></>;
+        <h4>{howLongUntilRelease()[1] ? "Liberado há:" : "Saída em:"}</h4>
+        <h3>{howLongUntilRelease()[0]}</h3>
+      </div>
+    </Link>
+  );
 }

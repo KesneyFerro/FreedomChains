@@ -14,17 +14,30 @@ import UserCard from "./components/users/userCard";
 import { PiSpinner } from "react-icons/pi";
 
 export default function Home() {
+  // const {
+  //   data: idsPrisioneiro,
+  //   error,
+  //   isPending,
+  // } = useReadContract({
+  //   abi: abiData,
+  //   address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
+  //   functionName: "getAllPrisonerIDs",
+  //   chainId: 534351,
+  //   args: [],
+  // });
+
   const {
-    data: idsPrisioneiro,
+    data: prisioneiros,
     error,
     isPending,
   } = useReadContract({
     abi: abiData,
-    address: "0xE6480Bd963438fc845eFaA7497e8Fc0C5ab93516",
-    functionName: "getAllPrisonerIDs",
+    address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
+    functionName: "getAllPrisonerDetails",
     chainId: 534351,
     args: [],
   });
+
   const [selectedMenu, setSelectedMenu] = useState(0);
 
   return (
@@ -41,15 +54,52 @@ export default function Home() {
         </div>
       )}
       <section className="w-full flex flex-col gap-y-4 mt-5">
-        {(idsPrisioneiro as BigInt[])?.map((id) => {
-          return (
-            <UserCard
-              key={id.toString()}
-              prisonerId={id}
-              selectedMenu={selectedMenu}
-            />
-          );
-        })}
+        {selectedMenu == 0 &&
+          (prisioneiros as any[])?.map((prisioneiro) => {
+            return (
+              <UserCard
+                key={prisioneiro.id.toString()}
+                prisonerId={prisioneiro.id}
+                selectedMenu={selectedMenu}
+              />
+            );
+          })}
+        {selectedMenu == 1 &&
+          (prisioneiros as any[])
+            ?.filter((prisioneiro) => {
+              const finalDate = new Date(
+                Number((prisioneiro as any)?.releaseDate) * 1000 || 0
+              );
+              const difference =
+                finalDate.getTime() -
+                new Date(
+                  new Date().setDate(new Date().getDate() - 1)
+                ).getTime();
+              const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+              const months = Math.floor(days / 30);
+              return months <= 1 && days > 0;
+            })
+            ?.map((prisioneiro) => (
+              <UserCard
+                key={prisioneiro.id.toString()}
+                prisonerId={prisioneiro.id}
+                selectedMenu={selectedMenu}
+              />
+            ))}
+        {selectedMenu == 2 &&
+          (prisioneiros as any[])
+            ?.filter(
+              (prisioneiro) =>
+                new Date(Number(prisioneiro.releaseDate) * 1000).getTime() <
+                new Date(new Date().setDate(new Date().getDate() - 1)).getTime()
+            )
+            ?.map((prisioneiro) => (
+              <UserCard
+                key={prisioneiro.id.toString()}
+                prisonerId={prisioneiro.id}
+                selectedMenu={selectedMenu}
+              />
+            ))}
       </section>
     </main>
   );

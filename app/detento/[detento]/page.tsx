@@ -5,21 +5,61 @@ import SearchBar from "@/app/components/nav/seachBar";
 import { useReadContract } from "wagmi";
 import { abiData } from "@/app/abis/abi";
 import { PiSpinner } from "react-icons/pi";
+import { useEffect, useState } from "react";
 
 export default function Detento({}) {
   const params = useParams<{ detento: string }>();
-  console.log(params.detento);
   const {
     data: prisioneiro,
     error,
     isPending,
   } = useReadContract({
     abi: abiData,
-    address: "0xE6480Bd963438fc845eFaA7497e8Fc0C5ab93516",
+    address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
     functionName: "getPrisonerInfo",
     chainId: 534351,
     args: [BigInt(params.detento)],
   });
+
+  const {
+    data: behavorRecords,
+    error: errorBehavorRecords,
+    isPending: isPendingBehavorRecords,
+  } = useReadContract({
+    abi: abiData,
+    address: "0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5",
+    functionName: "getBehaviorRecords",
+    chainId: 534351,
+    args: [BigInt(params.detento)],
+  });
+
+  console.log(behavorRecords);
+  const [comportamentoAnalytic, setComportamentoAnalytic] = useState<any>([]);
+
+  useEffect(() => {
+    if (behavorRecords) {
+      fetch("https://fastapi-example-wxta.onrender.com/historico/json", {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id_detento: params.detento,
+          historico: (behavorRecords as any[])?.map((record: any) => ({
+            comportamento: record.behavior,
+            comentario: record.comment,
+            data: new Date(Number(record.date) * 1000).toLocaleDateString(),
+          })),
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setComportamentoAnalytic(data);
+        });
+    }
+  }, [behavorRecords]);
 
   if (isPending)
     return (
@@ -41,11 +81,17 @@ export default function Detento({}) {
       </div>
     );
   }
-
+  console.log(prisioneiro);
   const howLongUntilRelease = () => {
-    const initialDate = new Date(Number((prisioneiro as any)?.prisonDate) || 0);
-    const finalDate = new Date(Number((prisioneiro as any)?.releaseDate) || 0);
-    const difference = finalDate.getTime() - initialDate.getTime();
+    const initialDate = new Date(
+      Number((prisioneiro as any)?.prisonDate) * 1000 || 0
+    );
+    const finalDate = new Date(
+      Number((prisioneiro as any)?.releaseDate) * 1000 || 0
+    );
+    const difference =
+      finalDate.getTime() -
+      new Date(new Date().setDate(new Date().getDate() - 1)).getTime();
     const days = Math.floor(difference / (1000 * 60 * 60 * 24));
     const months = Math.floor(days / 30);
     const years = Math.floor(months / 12);
@@ -56,7 +102,10 @@ export default function Detento({}) {
     if (months > 0) {
       return [`${months} ${months === 1 ? "mês" : "meses"}`, false];
     }
-    return [`${days} ${days === 1 ? "dia" : "dias"}`, days <= 0];
+    return [
+      `${Math.abs(days)} ${Math.abs(days) === 1 ? "dia" : "dias"}`,
+      days <= 0,
+    ];
   };
 
   return (
@@ -95,14 +144,14 @@ export default function Detento({}) {
           <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Penitenciária:</h2>
             <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
-              {"0xb7D3F862ebBed6C5E61B76e407ce28ea16aD1289".slice(0, 16)}...
+              {(prisioneiro as any)?.createdBy.slice(0, 16)}...
             </h3>
           </div>
           <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Data de Prisão:</h2>
             <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
               {new Date(
-                Number((prisioneiro as any)?.prisonDate)
+                Number((prisioneiro as any)?.prisonDate) * 1000
               ).toLocaleDateString()}
             </h3>
           </div>
@@ -143,6 +192,23 @@ export default function Detento({}) {
                 Baixar Histórico Completo
               </button>
             </div>
+
+            {(behavorRecords as any)?.map((record: any, index: number) => (
+              <div
+                key={index}
+                className="p-3 flex flex-col rounded-md bg-[#ca61db]"
+              >
+                <div className="flex w-full justify-between items-center">
+                  <span className="text-white">Comportamento</span>
+                  <span className=" rounded-md bg-[#b246c4] text-white px-2 py-1">
+                    {record?.behavior}
+                  </span>
+                </div>
+                <div className="mt-3 rounded-md bg-[#b246c4] text-white px-3 py-2 w-full  ">
+                  {record?.comment}
+                </div>
+              </div>
+            ))}
           </section>
         </div>
       </section>

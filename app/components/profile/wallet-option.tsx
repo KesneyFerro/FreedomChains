@@ -5,12 +5,13 @@ export function WalletOptions() {
   const { connectors, connect } = useConnect();
 
   return (
-    <div className="flex gap-x-5 flex-row">
+    <div className="flex gap-y-2 w-full bg-white rounded-lg shadow-lg p-4 flex-col justify-center items-center">
+      <h3 className="font-light mb-2">Selecione uma forma de Login</h3>
       {connectors.map((connector) => (
         <WalletOption
           key={connector.uid}
           connector={connector}
-          onClick={() => connect({ connector })}
+          onClick={() => connect({ connector: connector })}
         />
       ))}
     </div>
@@ -35,7 +36,7 @@ function WalletOption({
 
   return (
     <button
-      className="px-3 py-1 bg-purple-500 rounded-md"
+      className="px-3 py-2 hover:bg-gray-300 transition-colors bg-gray-200 w-full rounded-md"
       disabled={!ready}
       onClick={onClick}
     >
