@@ -304,7 +304,7 @@ O projeto se beneficia da integração com inteligência artificial (IA) em um p
 
 O fluxograma demonstra de forma visual como a Inteligência Artificial é utilizada para automatizar processos e auxiliar na geração de relatórios e no cálculo das remições de pena do condenado:
 
-![1714875019071](assets\PT-FluxogramAI.png)
+![Fluxograma AI](./assets/PT-FluxogramAI.png)
 
 A IA opera em várias etapas para processar os dados dos comentários e gerar os relatórios finais:
 
