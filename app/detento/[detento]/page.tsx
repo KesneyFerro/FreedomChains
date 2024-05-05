@@ -33,7 +33,6 @@ export default function Detento({}) {
     args: [BigInt(params.detento)],
   });
 
-  console.log(behavorRecords);
   const [comportamentoAnalytic, setComportamentoAnalytic] = useState<any>([]);
 
   useEffect(() => {
@@ -55,11 +54,13 @@ export default function Detento({}) {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
-          setComportamentoAnalytic(data);
+          console.log(JSON.parse(data));
+          setComportamentoAnalytic(JSON.parse(data));
         });
     }
-  }, [behavorRecords]);
+  }, [behavorRecords, params.detento]);
+
+  console.log(comportamentoAnalytic);
 
   if (isPending)
     return (
@@ -167,19 +168,28 @@ export default function Detento({}) {
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Livros Lidos:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
-              20
+              {comportamentoAnalytic?.atividades_ressocializacao?.leitura
+                .livros_lidos
+                ? `${comportamentoAnalytic?.atividades_ressocializacao?.leitura.livros_lidos} Livros`
+                : "---"}
             </h3>
           </div>
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Tempo Estudado:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
-              89 horas
+              {comportamentoAnalytic?.atividades_ressocializacao?.estudo
+                .horas_estudo
+                ? `${comportamentoAnalytic?.atividades_ressocializacao?.estudo.horas_estudo} horas`
+                : "---"}
             </h3>
           </div>
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Tempo Trabalhado:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
-              357 horas
+              {comportamentoAnalytic?.atividades_ressocializacao?.trabalho
+                .dias_trabalhados
+                ? `${comportamentoAnalytic?.atividades_ressocializacao?.trabalho.dias_trabalhados} dias`
+                : "---"}
             </h3>
           </div>
         </div>

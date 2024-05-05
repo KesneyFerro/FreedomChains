@@ -12,6 +12,7 @@ import { WalletOptions } from "@/app/components/profile/wallet-option";
 import { config } from "@/config";
 import { switchChain } from "wagmi/actions";
 import { scrollSepolia } from "wagmi/chains";
+import { motion } from "framer-motion";
 
 export default function AdministrarDetentos() {
   const { data: hash, error, isPending, writeContract } = useWriteContract();
@@ -110,7 +111,10 @@ export default function AdministrarDetentos() {
       />
 
       {selectedMenu === 0 ? (
-        <form
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          key={selectedMenu}
           onSubmit={(e) => handleAddDetento(e)}
           className="flex flex-col gap-y-3 mt-5"
         >
@@ -163,9 +167,12 @@ export default function AdministrarDetentos() {
               </a>
             </span>
           )}
-        </form>
+        </motion.form>
       ) : (
-        <form
+        <motion.form
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          key={selectedMenu}
           onSubmit={(e) => handleAddComportamento(e)}
           className="flex flex-col gap-y-3 mt-5"
         >
@@ -216,7 +223,7 @@ export default function AdministrarDetentos() {
               </a>
             </span>
           )}
-        </form>
+        </motion.form>
       )}
     </div>
   );

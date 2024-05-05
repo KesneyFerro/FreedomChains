@@ -12,6 +12,7 @@ import SearchBar from "./components/nav/seachBar";
 import CustomNavMenu from "./components/menu/CustomNavMenu";
 import UserCard from "./components/users/userCard";
 import { PiSpinner } from "react-icons/pi";
+import { motion } from "framer-motion";
 
 export default function Home() {
   // const {
@@ -53,7 +54,12 @@ export default function Home() {
           <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
         </div>
       )}
-      <section className="w-full flex flex-col gap-y-4 mt-5">
+      <motion.section
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        key={selectedMenu}
+        className="w-full flex flex-col gap-y-4 mt-5"
+      >
         {selectedMenu == 0 &&
           (prisioneiros as any[])?.map((prisioneiro) => {
             return (
@@ -100,7 +106,7 @@ export default function Home() {
                 selectedMenu={selectedMenu}
               />
             ))}
-      </section>
+      </motion.section>
     </main>
   );
 }
