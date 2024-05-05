@@ -5,6 +5,7 @@ import Providers from "./providers";
 import { headers } from "next/headers";
 import { cookieToInitialState } from "wagmi";
 import { config } from "@/config";
+import Navbar from "./components/nav/nav";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Providers initialState={initialState}>{children}</Providers>
+        <Providers initialState={initialState}>
+          <div className="flex mx-auto max-w-[1000px] px-4 w-full flex-col items-center justify-center gap-y-0">
+            <Navbar />
+            {children}
+          </div>
+        </Providers>
       </body>
     </html>
   );
