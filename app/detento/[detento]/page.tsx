@@ -116,7 +116,7 @@ export default function Detento({}) {
       <section className="mt-5 pb-5 mb-5 flex flex-col w-full rounded-lg overflow-hidden drop-shadow-lg bg-white">
         <div
           id="userCard"
-          className="w-full flex items-center justify-between px-5 rounded-b-lg drop-shadow-md py-5 bg-[#b446c6]"
+          className="w-full gap-3 max-sm:flex-wrap flex items-center justify-between px-5 rounded-b-lg drop-shadow-md py-5 bg-[#b446c6]"
         >
           <div>
             <h1 className=" font-medium text-white">
@@ -127,7 +127,7 @@ export default function Detento({}) {
             </h3>
           </div>
           <div
-            className={`flex flex-col  font-medium  px-4  py-1.5 rounded-md text-center leading-tight text-[#9006a7] ${
+            className={`max-sm:w-full flex flex-col  font-medium  px-4  py-1.5 rounded-md text-center leading-tight text-[#9006a7] ${
               howLongUntilRelease()[1] ? "bg-[#fff]" : "bg-[#f8cbff]"
             }`}
           >
@@ -136,60 +136,66 @@ export default function Detento({}) {
           </div>
         </div>
         <div className="px-4 py-5 flex flex-col gap-y-3">
-          <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
+          <div className="bg-[#9a35aa] rounded-lg flex-wrap gap-x-3 flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Identificador do detento:</h2>
-            <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
+            <h3 className="max-sm:w-full  text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
               {(prisioneiro as any)?.id.toString()}
             </h3>
           </div>
-          <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
+          <div className="bg-[#9a35aa] rounded-lg flex-wrap gap-x-3 flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Penitenciária:</h2>
-            <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
+            <h3 className="max-sm:w-full  text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
               {(prisioneiro as any)?.createdBy.slice(0, 16)}...
             </h3>
           </div>
-          <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
+          <div className="bg-[#9a35aa] rounded-lg flex-wrap gap-x-3 flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Data de Prisão:</h2>
-            <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
+            <h3 className="max-sm:w-full  text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
               {new Date(
                 Number((prisioneiro as any)?.prisonDate) * 1000
               ).toLocaleDateString()}
             </h3>
           </div>
-          <div className="bg-[#9a35aa] rounded-lg flex items-center justify-between px-4 py-4">
+          <div className="bg-[#9a35aa] rounded-lg flex-wrap gap-x-3 flex items-center justify-between px-4 py-4">
             <h2 className="text-white">Tempo Restante:</h2>
-            <h3 className="text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
+            <h3 className="max-sm:w-full  text-white bg-[#b246c4] px-3 py-0.5 rounded-md">
               {howLongUntilRelease()[0]}
             </h3>
           </div>
         </div>
 
-        <div className="flex items-center justify-between px-4 gap-x-5 ">
+        <div className="flex items-center max-sm:flex-wrap justify-between px-4 gap-5 ">
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Livros Lidos:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
               {comportamentoAnalytic?.atividades_ressocializacao?.leitura
-                .livros_lidos
-                ? `${comportamentoAnalytic?.atividades_ressocializacao?.leitura.livros_lidos} Livros`
-                : "---"}
+                .livros_lidos ? (
+                `${comportamentoAnalytic?.atividades_ressocializacao?.leitura.livros_lidos} Livros`
+              ) : (
+                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+              )}
             </h3>
           </div>
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Tempo Estudado:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
               {comportamentoAnalytic?.atividades_ressocializacao?.estudo
-                .horas_estudo
-                ? `${comportamentoAnalytic?.atividades_ressocializacao?.estudo.horas_estudo} horas`
-                : "---"}
+                .horas_estudo ? (
+                `${comportamentoAnalytic?.atividades_ressocializacao?.estudo.horas_estudo} horas`
+              ) : (
+                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+              )}
             </h3>
           </div>
           <div className="w-full bg-[#9a35aa] rounded-lg flex items-center justify-center flex-col gap-y-2 px-4 py-4">
             <h2 className="text-white text-center">Tempo Trabalhado:</h2>
             <h3 className="text-white bg-[#b246c4] text-center px-3 py-0.5 rounded-md">
               {comportamentoAnalytic?.atividades_ressocializacao?.trabalho
-                .dias_trabalhados
-                ? `${comportamentoAnalytic?.atividades_ressocializacao?.trabalho.dias_trabalhados} dias`
-                : "---"}
+                .dias_trabalhados ? (
+                `${comportamentoAnalytic?.atividades_ressocializacao?.trabalho.dias_trabalhados} dias`
+              ) : (
+                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+              )}
             </h3>
           </div>
         </div>
@@ -208,7 +214,7 @@ export default function Detento({}) {
                 key={index}
                 className="p-3 flex flex-col rounded-md bg-[#ca61db]"
               >
-                <div className="flex w-full justify-between items-center">
+                <div className="flex w-full flex-wrap justify-between items-center">
                   <span className="text-white">Comportamento</span>
                   <span className=" rounded-md bg-[#b246c4] text-white px-2 py-1">
                     {record?.behavior}
