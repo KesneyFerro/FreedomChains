@@ -13,6 +13,8 @@ import { config } from "@/config";
 import { switchChain } from "wagmi/actions";
 import { scrollSepolia } from "wagmi/chains";
 import { motion } from "framer-motion";
+import AddComportamento from "./addComportamento";
+import TokenShop from "./tokenShop";
 
 export default function AdministrarDetentos() {
   const { data: hash, error, isPending, writeContract } = useWriteContract();
@@ -105,12 +107,12 @@ export default function AdministrarDetentos() {
       )}
 
       <CustomNavMenu
-        menuNames={["Add Detento", "Add Comportamento"]}
+        menuNames={["Add Detento", "Add Comportamento", "TokenShop"]}
         selectIndex={selectedMenu}
         setSelectedIndex={setSelectedMenu}
       />
 
-      {selectedMenu === 0 ? (
+      {selectedMenu === 0 && (
         <motion.form
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -163,68 +165,14 @@ export default function AdministrarDetentos() {
                 rel="noreferrer"
                 className="text-blue-500"
               >
-                Ver transação
-              </a>
-            </span>
-          )}
-        </motion.form>
-      ) : (
-        <motion.form
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          key={selectedMenu}
-          onSubmit={(e) => handleAddComportamento(e)}
-          className="flex flex-col gap-y-3 mt-5"
-        >
-          <Input
-            isRequired
-            label="Identificador do Detento"
-            type="number"
-            isDisabled={isPending}
-            value={identificadorDetentoComportamento}
-            onChange={(e) =>
-              setIdentificadorDetentoComportamento(e.target.value)
-            }
-          />
-          <Input
-            isRequired
-            label="Comportamento"
-            type="text"
-            isDisabled={isPending}
-            value={tipoComportamento}
-            onChange={(e) => setTipoComportamento(e.target.value)}
-          />
-          <Textarea
-            isRequired
-            label="Identificador do Detento"
-            type="text"
-            isDisabled={isPending}
-            value={dataComportamento}
-            onChange={(e) => setDataComportamento(e.target.value)}
-          />
-          <Button
-            isDisabled={isPending}
-            type="submit"
-            color={error ? "danger" : "secondary"}
-            isLoading={isPending}
-          >
-            {error ? "Ocorreu um erro" : "Adicionar Comportamento"}
-          </Button>
-          {hash && (
-            <span>
-              Transação enviada com sucesso:{" "}
-              <a
-                href={`https://sepolia.scrollscan.com/tx/${hash}`}
-                target="_blank"
-                rel="noreferrer"
-                className="text-blue-500"
-              >
-                Ver transação
+                Ver transação.
               </a>
             </span>
           )}
         </motion.form>
       )}
+      {selectedMenu === 1 && <AddComportamento key={selectedMenu} />}
+      {selectedMenu === 2 && <TokenShop key={selectedMenu} />}
     </div>
   );
 }

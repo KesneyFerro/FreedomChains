@@ -6,8 +6,10 @@ import { useReadContract } from "wagmi";
 import { abiData } from "@/app/abis/abi";
 import { PiSpinner } from "react-icons/pi";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Detento({}) {
+  const reportsAvailable = ["2396", "5832", "5990", "7438", "9836"];
   const params = useParams<{ detento: string }>();
   const {
     data: prisioneiro,
@@ -172,7 +174,7 @@ export default function Detento({}) {
                 .livros_lidos ? (
                 `${comportamentoAnalytic?.atividades_ressocializacao?.leitura.livros_lidos} Livros`
               ) : (
-                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+                <PiSpinner className="text-2xl text-[#fff] animate-spin" />
               )}
             </h3>
           </div>
@@ -183,7 +185,7 @@ export default function Detento({}) {
                 .horas_estudo ? (
                 `${comportamentoAnalytic?.atividades_ressocializacao?.estudo.horas_estudo} horas`
               ) : (
-                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+                <PiSpinner className="text-2xl text-[#fff] animate-spin" />
               )}
             </h3>
           </div>
@@ -194,7 +196,7 @@ export default function Detento({}) {
                 .dias_trabalhados ? (
                 `${comportamentoAnalytic?.atividades_ressocializacao?.trabalho.dias_trabalhados} dias`
               ) : (
-                <PiSpinner className="text-2xl text-[#9006a7] animate-spin" />
+                <PiSpinner className="text-2xl text-[#fff] animate-spin" />
               )}
             </h3>
           </div>
@@ -204,9 +206,26 @@ export default function Detento({}) {
             <h4 className="text-white font-medium">Histórico</h4>
 
             <div className="p-3 rounded-md bg-[#ca61db]">
-              <button className="rounded-md bg-[#b246c4] text-white px-3 py-2 w-full uppercase ">
-                Baixar Histórico Completo
-              </button>
+              <Link
+                target="_blank"
+                href={
+                  reportsAvailable.includes(params.detento)
+                    ? `/Reports/${params.detento}/relatorio.pdf`
+                    : ""
+                }
+                className={
+                  reportsAvailable.includes(params.detento)
+                    ? "cursor-pointer"
+                    : "cursor-not-allowed"
+                }
+              >
+                <button
+                  disabled={!reportsAvailable.includes(params.detento)}
+                  className="rounded-md disabled:text-white/50 disabled:bg-[#8d4c99]  bg-[#b246c4] text-white px-3 py-2 w-full uppercase "
+                >
+                  Baixar Histórico Completo
+                </button>
+              </Link>
             </div>
 
             {(behavorRecords as any)?.map((record: any, index: number) => (
