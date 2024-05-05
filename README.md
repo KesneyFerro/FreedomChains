@@ -200,21 +200,50 @@ No contexto do Sistema Nacional de Administração Penitenciária (SNAP), o sist
 
 Nessa perspectiva, para implementação desse projeto, foi necessário a criação de um contrato inteligente capaz de armazenar informações de ID, datas de prisão e previsão de encerramento da pena, indicadores de bom/mau comportamento junto a comentários justificando-os. Para isso, foi utilizada a linguagem ``Solidity`` como principal tecnologia, além disso, naturalmente foi necessário deployar esse contrato utilizado utilizando a tecnologia de ``EVM`` por meio do [Remix](https://remix.ethereum.org).
 
+**Características do Sistema**
+
+*Lançamento de dados para Blockchain*
+
+O sistema de cadastro e monitoramento utiliza a tecnologia blockchain para garantir a imutabilidade e a transparência dos registros. Os principais dados registrados incluem:
+- ID do Presidiário: Identificação única para cada detento.
+- Data de Prisão: Timestamp da data de início da detenção.
+- Previsão de Soltura: Timestamp da data prevista para soltura.
+- Status de Detenção: Indicador se o preso está atualmente detido ou não.
+- Registros de Comportamento: Entradas documentando o comportamento do detento, que podem incluir "Bom Comportamento" ou "Mau Comportamento", com comentários relevantes.
+
+
+*Controle de Acesso*
+
+Para garantir que apenas agentes autorizados manipulem as informações dos detentos, o sistema implementa um controle de acesso rigoroso. O administrador do contrato (owner) tem a capacidade de autorizar ou revogar o acesso de wallets específicas, assegurando que somente pessoal qualificado e aprovado possa adicionar ou alterar os registros. Esta camada de segurança é vital para manter a integridade e a confidencialidade dos dados dos presidiários.
+
+*Exibir dados filtrados*
+
+A aplicação consegue puxar dados já deployados na blockchain e traze-los com filtros, no intuito de auxiliar a visualização dos usuários. As funções de retorno de dados incluem:
+- Listar todos os IDs cadastrados no sistema
+- Listar todo o histórico de um detento com ID pesquisável, sendo possível identificar pontos de bom/mau comportamento e um comentário que justifique-o
+- Visualizar o registro dos detentos junto a suas datas de prisão e previsão de encerramento da pena
+
+Essas funcionalidades conseguem atender as dificuldades encontradas no processo, cumprindo o objetivo da solução. Para isso, foi desenvolvido um smart contract 
+
 O contrato pode ser visualizado abaixo:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /**
  * @title PrisonerManagementSystem
- * @dev This contract manages basic information and behavioral records of prisoners.
+ * @dev Este contrato gerencia informações básicas e registros de comportamento de presidiários,
+ * com restrições de acesso controladas pelo owner do contrato.
  */
-contract PrisonerManagementSystem {
+contract PrisonerManagementSystem is Ownable {
     struct PrisonerInfo {
         uint256 id;
         uint256 prisonDate;
         uint256 releaseDate;
+        bool isDetained;
     }
 
     struct BehaviorRecord {
@@ -223,68 +252,61 @@ contract PrisonerManagementSystem {
         string comment;
     }
 
-    // Mapping of prisoner ID to their basic information
+    uint256[] private prisonerIds;  // Array para armazenar todos os IDs de presidiários
     mapping(uint256 => PrisonerInfo) public prisonerInfo;
-
-    // Mapping of prisoner ID to the list of behavioral records
     mapping(uint256 => BehaviorRecord[]) public behaviorRecords;
+    mapping(address => bool) public authorized;
 
-    // Events
-    event PrisonerInfoRegistered(uint256 indexed prisonerId, uint256 prisonDate, uint256 releaseDate);
+    event PrisonerInfoRegistered(uint256 indexed prisonerId, uint256 prisonDate, uint256 releaseDate, bool isDetained);
     event BehaviorRecordAdded(uint256 indexed prisonerId, string behavior, string comment);
+    event AuthorizationUpdated(address indexed agent, bool isAuthorized);
+    event NewPrisonerID(uint256 prisonerId);  // Evento para notificar sobre um novo ID de presidiário
 
-    /**
-     * @notice Records basic information of a prisoner.
-     * @param _id Prisoner ID.
-     * @param _prisonDate Date of imprisonment as Unix timestamp.
-     * @param _releaseDate Release forecast as Unix timestamp.
-     */
-    function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate) public {
-        require(_id != 0, "ID do presidiario nao pode ser zero.");
-        require(_prisonDate != 0 && _releaseDate != 0, "As datas nao podem ser zero.");
-        require(_releaseDate > _prisonDate, "A data de soltura deve ser posterior a data da prisao.");
-        
+    constructor() Ownable(0xe56F3e90B6faB303B191f8195Df3933f88aad297) {
+        authorized[msg.sender] = true; // Owner is automatically authorized
+    }
+
+    modifier onlyAuthorized() {
+        require(authorized[msg.sender], "You are not authorized to perform this action");
+        _;
+    }
+
+    function authorizeAgent(address _agent, bool _isAuthorized) public onlyOwner {
+        authorized[_agent] = _isAuthorized;
+        emit AuthorizationUpdated(_agent, _isAuthorized);
+    }
+
+    function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate, bool _isDetained) public onlyAuthorized {
         prisonerInfo[_id] = PrisonerInfo({
             id: _id,
             prisonDate: _prisonDate,
-            releaseDate: _releaseDate
+            releaseDate: _releaseDate,
+            isDetained: _isDetained
         });
-
-        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate);
+        prisonerIds.push(_id);  // Armazena o ID no array
+        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate, _isDetained);
+        emit NewPrisonerID(_id);  // Emite o evento com o novo ID
     }
 
-    /**
-     * @notice Records a new behavior for a prisoner.
-     * @param _id Prisoner ID.
-     * @param _behavior Description of the behavior ('good behavior' or 'bad behavior').
-     * @param _comment Comment on the behavior.
-     */
-    function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public {
+    function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public onlyAuthorized {
         behaviorRecords[_id].push(BehaviorRecord({
             date: block.timestamp,
             behavior: _behavior,
             comment: _comment
         }));
-
         emit BehaviorRecordAdded(_id, _behavior, _comment);
     }
 
-    /**
-     * @notice Retrieves basic information of a prisoner.
-     * @param _id Prisioner ID.
-     * @return Basic prisoner information.
-     */
     function getPrisonerInfo(uint256 _id) public view returns (PrisonerInfo memory) {
         return prisonerInfo[_id];
     }
 
-    /**
-     * @notice Retrieves all behavior records of a specific prisoner.
-     * @param _id Prisioner ID.
-     * @return A list of behavior records.
-     */
     function getBehaviorRecords(uint256 _id) public view returns (BehaviorRecord[] memory) {
         return behaviorRecords[_id];
+    }
+
+    function getAllPrisonerIDs() public view returns (uint256[] memory) {
+        return prisonerIds;
     }
 }
 ```
