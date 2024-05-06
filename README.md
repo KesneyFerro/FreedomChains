@@ -389,6 +389,215 @@ contract FDC is ERC20, ERC20Burnable, Ownable {
 }
 ```
 
+Here's a translation of the provided content into English, reformatted for a README.md file:
+
+---
+
+## Lumx Protocol API Integration
+
+Integrating the Lumx Protocol API was a strategic decision crucial for the success of the project. Known for its innovation and technological excellence, Lumx Protocol offers a robust and highly secure platform for blockchain application development. Opting for Lumx Protocol not only allowed us to implement complex functionalities with ease but also ensured the security and reliability of our reward system. The ability to interact with the contract to perform mint operations is a testament to the flexibility and efficiency of the Lumx Protocol. The Lumx API stands out for its intuitive interface and exceptional support, facilitating seamless integration and enabling our team to focus on optimizing user experience and system functionality.
+
+The introduction of the FDC token within SNAP has created a motivating environment for agents, encouraging consistency and accuracy in data recording. Moreover, the tokenization of rewards enhances the transparency of operations, as each transaction and token accumulation are recorded on the blockchain, providing complete visibility for system administrators and agents. Implementing this token system aligns our initiative with modern scopes of loyalty and digital engagement and redefines how penitentiary operations can be managed, offering a replicable model for other institutions seeking to modernize and improve their systems through blockchain technology.
+
+Using tokens as a loyalty mechanism represents a significant innovation in penitentiary administration, providing a tangible incentive for the continuous improvement of agent performance. Despite some technical challenges, the partnership with Lumx Protocol has proven to be extremely valuable, allowing us to explore new frontiers in blockchain technology and data security, setting a new standard of efficacy and efficiency within the public sector.
+
+In summary, implementing the prisoner registration and monitoring system within the context of the National Penitentiary Administration System (SNAP) demonstrates how blockchain technology, combined with smart contracts and a user-friendly interface like MetaMask, can revolutionize transparency and efficiency in penitentiary management. By providing a transparent portal for updating inmate data and recording behaviors through smart contracts, the system promotes the immutability of information and the integrity of each prisoner's criminal history. This not only simplifies the monitoring process but also enhances trust in prison administration by ensuring a fairer and more transparent approach. Ultimately, this initiative represents a significant advance in modernizing the prison system, aiming for more effective and humane management, and ensuring effectiveness through customer loyalty.
+
+### Artificial Intelligence
+
+The project benefits from integrating artificial intelligence (AI) in a blockchain application project aimed at generating reports on inmates. AI is used to process comments from prison officers and generate standardized reports, providing valuable insights into inmate behavior.
+
+The flowchart visually demonstrates how Artificial Intelligence is used to automate processes and assist in report generation and calculation of sentence reductions for the convict:
+
+![AI Flowchart](./assets/PT-FluxogramAI.png)
+
+AI operates in several stages to process the data from comments and generate the final reports:
+
+1. **Pre-processing of comments:** Comments from prison officers undergo a pre-processing stage for data cleaning and normalization. This includes removing noise such as unnecessary punctuation, case sensitivity, and irrelevant words, as well as stripping any mention of personal names to ensure the privacy of the inmate.
+
+   Example of a prison officer's comment:
+   ```
+   The inmate has shown considerable dedication to his studies this month, completing approximately 36 hours in professional requalification courses. Additionally, he read and wrote reports on 3 different books, contributing positively to his sentence reduction.
+   ```
+2. **Information Extraction:** After processing the comments submitted by the prison officer, AI extracts relevant information from the comments. This includes identifying good and bad behaviors mentioned by prison officers, as well as any resocialization actions undertaken by inmates.
+
+   Example of the JSON generated after information extraction:
+   ```
+   {
+       "comment": "This month, the inmate completed three more books, showing a continuous dedication to studies and increasing awareness of his rehabilitation. Maintains good behavior and cooperation.",
+       "comment_date": "07/12/2023",
+       "good_behavior_indices": [
+           "Continuous dedication to studies",
+           "Awareness of the importance of rehabilitation",
+           "Good behavior and constant cooperation"
+       ],
+       "bad_behavior_indices": [],
+       "resocialization_activities": {
+           "reading": {
+               "books_read": "3",
+               "snippet": "completed three more books"
+           },
+           "study": {
+               "study_hours": "36",
+               "snippet": "continuous dedication to studies"
+           },
+           "work": {
+               "work_days": "30",
+               "snippet": "showing continuous dedication"
+           }
+       }
+   }
+   ```
+3. **Report Generation:** Based on the extracted information, AI generates detailed reports on inmate behavior. The reports include lists of good and bad behaviors, recurrences of these behaviors, and resocialization actions. Each piece of information is associated with the date of the corresponding comment.
+
+   Example of a report:
+   ```
+   ### 1 - List of bad behaviors, with the corresponding comment date
+
+
+
+   | Bad Behavior                                   | Comment Date |
+   |------------------------------------------------|--------------|
+   | Involved in a fight with another inmate        | 10/18/2023   |
+   | Did not participate in resocialization activities | 10/18/2023 |
+   | Disobeyed prison rules                         | 10/18/2023   |
+   | Aggressive behavior                            | 10/22/2023   |
+   | Lack of cooperation with guards                | 10/22/2023   |
+   | Refused to work in gardening                   | 10/22/2023   |
+   | Neglected educational responsibilities         | 10/28/2023   |
+   | Attempted smuggling of unauthorized items      | 10/28/2023   |
+   | Disrespect for prison rules                    | 10/28/2023   |
+
+   ### 2 - List of recurrences of bad behaviors
+
+   | Bad Behavior                      | Frequency |
+   |-----------------------------------|-----------|
+   | Disobeyed prison rules            | 2         |
+   | Disrespect for prison rules       | 2         |
+
+   ### 3 - List of good behaviors, with the corresponding comment date
+
+   | Good Behavior                                | Comment Date |
+   |----------------------------------------------|--------------|
+   | Read 5 books in one month                    | 10/15/2023   |
+   | Wrote detailed reports for each book         | 10/15/2023   |
+   | Worked every business day of the month in the workshop | 10/15/2023 |
+   | Read 4 new books                             | 10/20/2023   |
+   | Completed 36 hours of study in carpentry     | 10/20/2023   |
+   | Maintained constant involvement in activities| 10/20/2023   |
+   | Actively participated in high school classes | 10/25/2023   |
+   | Worked diligently in the laundry             | 10/25/2023   |
+   | Demonstrated respect and continuous cooperation | 10/25/2023 |
+
+   ### 4 - List of recurrences of good behaviors
+
+   | Good Behavior                        | Frequency |
+   |--------------------------------------|-----------|
+   | Constant and diligent work           | 2         |
+   | Active participation in activities   | 2         |
+
+   ### 5 - Resocialization Actions
+
+   - **Reading:**
+     - Total books read: 9
+
+   - **Study:**
+     - Total study hours: 96 hours (36 hours in carpentry, 60 hours high school)
+
+   - **Work:**
+     - Total work days: 44 (22 days in laundry workshop, 22 days in other work)
+   ```
+4. **Report Comparison:** When a new report is generated, it is compared with the last report generated for the same inmate. This allows for identifying changes in behavior over time. AI calculates averages and other metrics to highlight these changes and provide insights into the inmate's progress, whether positive or negative.
+
+Additionally, it is worth mentioning that **the LLM model is instructed to censor any name or any information that might compromise the security of those mentioned**. This is done to prevent data leaks and ensure the security and privacy of all involved in the process, as well as to avoid biases and prejudices by those using the platform.
+
+For the development of the backend related to the LLM, the following technologies were used:
+
+* **Natural Language Processing (NLP)**: Used for sentiment analysis and information extraction from comments.
+- **Machine Learning Algorithms**: Implemented for text classification, report generation, and data comparison.
+- **Blockchain**: Used to securely and immutably store comments from prison officers and reports generated by AI.
+- **Database**: Stores temporary and final data for processing and querying.
+
+The integration of artificial intelligence in this blockchain application project brings significant benefits by automating the report generation process about inmates. This not only increases operational efficiency but also provides valuable insights to assist in penitentiary management decisions. AI contributes to a more proactive and informed approach in treating and monitoring inmates, promoting better outcomes in resocialization and social reintegration.
+
+## 📍 Future Plans
+
+*Expansion of Functional Coverage:*
+- *Automated Judicial Monitoring:* Develop features that allow automated monitoring of judicial cases associated with inmates, integrating with court systems for real-time updates.
+- *Management of Educational and Work Resources:* Expand the system to manage and record educational and work activities of prisoners, including completed courses and acquired skills.
+
+*Integration with Other Platforms and Services:*
+- *APIs for Integration with NGOs and Social Services:* Enable non-governmental organizations and social services to access information about inmate progress to facilitate reintegration programs.
+- *Connection with Employment Platforms:* Create partnerships with employment platforms to help ex-inmates find work post-release.
+
+*Security and Privacy Improvements:*
+- *Frequent Security Audits:* Implement regular security audits to ensure that inmate data
+
+ is kept secure and private.
+
+*Advanced Data Analysis and AI:*
+- *Resocialization Prediction:* Use machine learning models to predict resocialization success based on inmate behavior and engagement in productive activities.
+- *Anomaly Detection:* Implement anomaly detection algorithms to automatically identify suspicious data entries or inconsistencies in reports.
+
+*Geographic Expansion:*
+- *Adaptation for Other Legal Systems:* Adapt the software to be compatible with prison systems of other countries, considering their specific laws and regulations.
+
+## 👁️ Where to Look in the Code
+
+### Scroll
+
+Contract: 0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5 `<br/>`
+Contract link on [Scroll Etherscan](https://sepolia.scrollscan.com/address/0x6f152c6bf0a8c692e66fe7c1cf2c29b7d4ece37a)
+
+Scroll is a notably efficient blockchain platform, distinguished by its operational viability. We chose Scroll as the foundation for our project due to its extremely stable network and reduced gas fee costs, crucial elements for a viable and practical implementation in real-life scenarios. This strategic choice ensures that our application is not only sustainable but also broadly accessible, democratizing access to cutting-edge technologies in critical public administration systems and guaranteeing an innovative solution that promises to transform how we interact with vital governmental infrastructures.
+
+### Lumx
+
+Lumx is a blockchain platform that stands out for its innovation and robustness, providing a highly efficient development environment for our projects. We chose Lumx as the basis for our initiative due to its ease and intuitiveness in dealing with blockchain technologies in a less complex and more user-friendly manner. This strategic decision ensures that our application is not only sustainable but also highly efficient, democratizing access to advanced technologies in essential public administration systems and offering an innovative solution that promises to revolutionize how government infrastructures interact and operate. Lumx, with its exemplary support and cutting-edge technology, allows for smooth integration and reliable operation, ensuring that our project can achieve and exceed its goals successfully.
+
+## 😎 Our Team
+
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/gustavo-dacosta/">
+        <img src="https://media.licdn.com/dms/image/D4D03AQEafql2JkG4iQ/profile-displayphoto-shrink_800_800/0/1696874768177?e=1717027200&v=beta&t=P4DVd2c779eDlf2AKCTZ3A_lJkFjQ_S3QcDw8SQNrtY" width="100px;" alt="Daniel Augusto profile image"/><br>
+        <sub>
+          <b>Gustavo Gonçalves</b>
+        </sub>
+      </a>
+    </td>
+  <td align="center"> 
+      <a href="https://www.linkedin.com/in/joaolimamarinho/">
+        <img src="https://media.licdn.com/dms/image/D4D03AQEpKXL2hfWX_w/profile-displayphoto-shrink_800_800/0/1694720169840?e=1720051200&v=beta&t=1hXPRJ2VDCtSkZWCIGdyN-scDbceuA6oQpLurCELA4Q" width="100px;" alt="João Lima profile image"/><br>
+        <sub>
+          <b>João Lima</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/kesneylucas/">
+        <img src="https://media.licdn.com/dms/image/D4D03AQEw5ZsuniNLwQ/profile-displayphoto-shrink_800_800/0/1692393475145?e=1717027200&v=beta&t=UjFlZa4k_PZgxiWy27XckXoRSyBckwNrhPFJVVCj7NE" width="100px;" alt="Kesney Lucas profile image"/><br>
+        <sub>
+          <b>Kesney Lucas</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://www.linkedin.com/in/thiagovolcati">
+        <img src="https://media.licdn.com/dms/image/D4D03AQFHwAts5UCcaQ/profile-displayphoto-shrink_800_800/0/1707242861857?e=1720051200&v=beta&t=NQy5ublXd2usTpfIKcOqh1OTB5yKx1
+
+zHrOdrL0zVncI" width="100px;" alt="Kesney Lucas profile image"/><br>
+        <sub>
+          <b>Thiago Volcati</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
+
+---
+
 
 # Freedom Chains
 
