@@ -569,6 +569,10 @@ Scroll is a notably efficient blockchain platform, distinguished by its operatio
 
 ### Lumx
 
+Path: \FreedomChains\LumxProtocol
+
+In the above file, you can find a homepage that tests and showcases the functionalities of a contract interacting with the Lumx Protocol and will have usability in our solution.
+
 Lumx is a blockchain platform that stands out for its innovation and robustness, providing a highly efficient development environment for our projects. We chose Lumx as the basis for our initiative due to its ease and intuitiveness in dealing with blockchain technologies in a less complex and more user-friendly manner. This strategic decision ensures that our application is not only sustainable but also highly efficient, democratizing access to advanced technologies in essential public administration systems and offering an innovative solution that promises to revolutionize how government infrastructures interact and operate. Lumx, with its exemplary support and cutting-edge technology, allows for smooth integration and reliable operation, ensuring that our project can achieve and exceed its goals successfully.
 
 <a name="ourTeam"></a>
@@ -1203,6 +1207,11 @@ Link do contrato no [Scroll Etherscan](https://sepolia.scrollscan.com/address/0x
 A Scroll é uma plataforma blockchain notavelmente eficiente, que se destaca pela sua viabilidade operacional. Optamos pela Scroll como alicerce do nosso projeto devido à sua rede extremamente estável e aos custos de gas fee reduzidos, elementos cruciais para uma implementação viável e prática em cenários da vida real. Esta escolha estratégica assegura que nossa aplicação seja não apenas sustentável, mas também amplamente acessível, democratizando o acesso a tecnologias de ponta em sistemas críticos de administração pública e garantindo uma solução inovadora que promete transformar a maneira como interagimos com infraestruturas estatais vitais.
 
 ### Lumx
+
+Caminho: \FreedomChains\LumxProtocol
+
+No arquivo acima é possível encontrar uma página inicial que testa e apresenta as funcionalidades de um contrato que está interagindo com o Lumx Protocol e terá usabilidade na nossa solução.
+
 
 A Lumx é uma plataforma de blockchain que se destaca por sua inovação e robustez, proporcionando um ambiente de desenvolvimento altamente eficiente para nossos projetos. Escolhemos a Lumx como base para nossa iniciativa devido à sua facilidade e intuitividade em lidar com tecnologias blockchain de maneira menos complexa, e mais agradável aos usuários e desenvolvedores. Esta decisão estratégica garante que nossa aplicação não só seja sustentável mas também altamente eficiente, democratizando o acesso a tecnologias avançadas em sistemas essenciais de administração pública e oferecendo uma solução inovadora que promete revolucionar a forma como as infraestruturas governamentais interagem e operam. A plataforma Lumx, com seu suporte exemplar e sua tecnologia de ponta, permite uma integração suave e uma operação confiável, garantindo que nosso projeto seja capaz de alcançar e superar suas metas com êxito.
 
