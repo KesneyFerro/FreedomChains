@@ -203,21 +203,52 @@ No contexto do Sistema Nacional de Administração Penitenciária (SNAP), o sist
 
 Nessa perspectiva, para implementação desse projeto, foi necessário a criação de um contrato inteligente capaz de armazenar informações de ID, datas de prisão e previsão de encerramento da pena, indicadores de bom/mau comportamento junto a comentários justificando-os. Para isso, foi utilizada a linguagem ``Solidity`` como principal tecnologia, além disso, naturalmente foi necessário deployar esse contrato utilizado utilizando a tecnologia de ``EVM`` por meio do [Remix](https://remix.ethereum.org).
 
+**Características do Sistema**
+
+*Lançamento de dados para Blockchain*
+
+O sistema de cadastro e monitoramento utiliza a tecnologia blockchain para garantir a imutabilidade e a transparência dos registros. Os principais dados registrados incluem:
+- ID do Presidiário: Identificação única para cada detento.
+- Data de Prisão: Timestamp da data de início da detenção.
+- Previsão de Soltura: Timestamp da data prevista para soltura.
+- Status de Detenção: Indicador se o preso está atualmente detido ou não.
+- Registros de Comportamento: Entradas documentando o comportamento do detento, que podem incluir "Bom Comportamento" ou "Mau Comportamento", com comentários relevantes.
+
+
+*Controle de Acesso*
+
+Para garantir que apenas agentes autorizados manipulem as informações dos detentos, o sistema implementa um controle de acesso rigoroso. O administrador do contrato (owner) tem a capacidade de autorizar ou revogar o acesso de wallets específicas, assegurando que somente pessoal qualificado e aprovado possa adicionar ou alterar os registros. Esta camada de segurança é vital para manter a integridade e a confidencialidade dos dados dos presidiários.
+
+*Exibir dados filtrados*
+
+A aplicação consegue puxar dados já deployados na blockchain e traze-los com filtros, no intuito de auxiliar a visualização dos usuários. As funções de retorno de dados incluem:
+- Listar todos os IDs cadastrados no sistema junto com todas as informações atreladas ao detento.
+- Listar todo o histórico de um detento com ID pesquisável, sendo possível identificar pontos de bom/mau comportamento e um comentário que justifique-o
+- Visualizar o registro dos detentos junto a suas datas de prisão e previsão de encerramento da pena
+
+Essas funcionalidades conseguem atender as dificuldades encontradas no processo, cumprindo o objetivo da solução. Para isso, foi desenvolvido um smart contract 
+
 O contrato pode ser visualizado abaixo:
 
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+
 /**
  * @title PrisonerManagementSystem
- * @dev This contract manages basic information and behavioral records of prisoners.
+ * @dev Este contrato gerencia informações básicas e registros de comportamento de presidiários,
+ * com restrições de acesso controladas pelo owner do contrato.
  */
-contract PrisonerManagementSystem {
+contract PrisonerManagementSystem is Ownable {
     struct PrisonerInfo {
         uint256 id;
         uint256 prisonDate;
         uint256 releaseDate;
+        bool isDetained;
+        address createdBy;
+        bytes32 transactionHash;
     }
 
     struct BehaviorRecord {
@@ -226,75 +257,163 @@ contract PrisonerManagementSystem {
         string comment;
     }
 
-    // Mapping of prisoner ID to their basic information
+    uint256[] private prisonerIds;  
     mapping(uint256 => PrisonerInfo) public prisonerInfo;
-
-    // Mapping of prisoner ID to the list of behavioral records
     mapping(uint256 => BehaviorRecord[]) public behaviorRecords;
+    mapping(address => bool) public authorized;  
+    address[] private authorizedAddresses;  
 
-    // Events
-    event PrisonerInfoRegistered(uint256 indexed prisonerId, uint256 prisonDate, uint256 releaseDate);
+    event PrisonerInfoRegistered(
+        uint256 indexed prisonerId,
+        uint256 prisonDate,
+        uint256 releaseDate,
+        bool isDetained,
+        address createdBy,
+        bytes32 transactionHash
+    );
     event BehaviorRecordAdded(uint256 indexed prisonerId, string behavior, string comment);
+    event AuthorizationUpdated(address indexed agent, bool isAuthorized);
+    event NewPrisonerID(uint256 prisonerId);  
 
-    /**
-     * @notice Records basic information of a prisoner.
-     * @param _id Prisoner ID.
-     * @param _prisonDate Date of imprisonment as Unix timestamp.
-     * @param _releaseDate Release forecast as Unix timestamp.
-     */
-    function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate) public {
-        require(_id != 0, "ID do presidiario nao pode ser zero.");
-        require(_prisonDate != 0 && _releaseDate != 0, "As datas nao podem ser zero.");
-        require(_releaseDate > _prisonDate, "A data de soltura deve ser posterior a data da prisao.");
-  
-        prisonerInfo[_id] = PrisonerInfo({
-            id: _id,
-            prisonDate: _prisonDate,
-            releaseDate: _releaseDate
-        });
-
-        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate);
+    constructor() Ownable(0xe56F3e90B6faB303B191f8195Df3933f88aad297) {
+        authorized[msg.sender] = true; 
+        authorizedAddresses.push(msg.sender);  // Adiciona o owner ao array de autorizados
     }
 
-    /**
-     * @notice Records a new behavior for a prisoner.
-     * @param _id Prisoner ID.
-     * @param _behavior Description of the behavior ('good behavior' or 'bad behavior').
-     * @param _comment Comment on the behavior.
-     */
-    function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public {
+    modifier onlyAuthorized() {
+        require(authorized[msg.sender], "You are not authorized to perform this action");
+        _;
+    }
+
+    function authorizeAgent(address _agent, bool _isAuthorized) public onlyOwner {
+        authorized[_agent] = _isAuthorized;
+        if (_isAuthorized && !isAlreadyAuthorized(_agent)) {
+            authorizedAddresses.push(_agent);
+        } else if (!_isAuthorized) {
+            removeAuthorizedAddress(_agent);
+        }
+        emit AuthorizationUpdated(_agent, _isAuthorized);
+    }
+
+    function getAuthorizedAddresses() public view returns (address[] memory) {
+        return authorizedAddresses;
+    }
+
+    function isAlreadyAuthorized(address _agent) private view returns (bool) {
+        for (uint i = 0; i < authorizedAddresses.length; i++) {
+            if (authorizedAddresses[i] == _agent) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function removeAuthorizedAddress(address _agent) private {
+        uint index = 0;
+        bool found = false;
+        for (uint i = 0; i < authorizedAddresses.length; i++) {
+            if (authorizedAddresses[i] == _agent) {
+                index = i;
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            authorizedAddresses[index] = authorizedAddresses[authorizedAddresses.length - 1];
+            authorizedAddresses.pop();
+        }
+    }
+
+      function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate, bool _isDetained) public onlyAuthorized {
+        PrisonerInfo memory info = PrisonerInfo({
+            id: _id,
+            prisonDate: _prisonDate,
+            releaseDate: _releaseDate,
+            isDetained: _isDetained,
+            createdBy: msg.sender,
+            transactionHash: bytes32(0) // Placeholder for actual transaction hash retrieval
+        });
+        prisonerInfo[_id] = info;
+        prisonerIds.push(_id);
+        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate, _isDetained, msg.sender, bytes32(0));
+        emit NewPrisonerID(_id);
+    }
+
+    function getAllPrisonerDetails() public view returns (PrisonerInfo[] memory) {
+        PrisonerInfo[] memory details = new PrisonerInfo[](prisonerIds.length);
+        for (uint256 i = 0; i < prisonerIds.length; i++) {
+            uint256 id = prisonerIds[i];
+            details[i] = prisonerInfo[id];
+        }
+        return details;
+    }
+
+       function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public onlyAuthorized {
         behaviorRecords[_id].push(BehaviorRecord({
             date: block.timestamp,
             behavior: _behavior,
             comment: _comment
         }));
-
         emit BehaviorRecordAdded(_id, _behavior, _comment);
     }
 
-    /**
-     * @notice Retrieves basic information of a prisoner.
-     * @param _id Prisioner ID.
-     * @return Basic prisoner information.
-     */
     function getPrisonerInfo(uint256 _id) public view returns (PrisonerInfo memory) {
         return prisonerInfo[_id];
     }
 
-    /**
-     * @notice Retrieves all behavior records of a specific prisoner.
-     * @param _id Prisioner ID.
-     * @return A list of behavior records.
-     */
-    function getBehaviorRecords(uint256 _id) public view returns (BehaviorRecord[] memory) {
+     function getBehaviorRecords(uint256 _id) public view returns (BehaviorRecord[] memory) {
         return behaviorRecords[_id];
+    }
+
+    function getAllPrisonerIDs() public view returns (uint256[] memory) {
+        return prisonerIds;
     }
 }
 ```
 
 Ademais, foi escolhida a MetaMask como tecnologia de carteira digital, servindo como um meio para o deployment diretamente na [rede de teste da Scroll](https://sepolia.scrollscan.com/address/0xdF0e1E6101ec169Bd9d7D30ADFfB9a28cE6E2B41). Dentro do projeto, atua ainda como um gateway para permitir aos usuários interagir com a Ethereum blockchain diretamente de seus navegadores web. É uma ferramenta essencial para facilitar o acesso seguro, fornecendo uma interface de usuário amigável para autenticar os deploys. Isso simplifica significativamente a interação dos agentes carcerários com o sistema, permitindo que eles realizem transações e consultas sem necessitar de conhecimento técnico profundo sobre smart contracts ou blockchain.
 
-Em suma, a implementação do sistema de cadastro e monitoramento de presidiários dentro do contexto do Sistema Nacional de Administração Penitenciária (SNAP) demonstra como a tecnologia blockchain, aliada a contratos inteligentes e uma interface amigável como a MetaMask, pode revolucionar a transparência e eficiência na gestão penitenciária. Ao fornecer um portal transparente para atualização de dados dos detentos e registrar comportamentos através de smart contracts, o sistema promove a imutabilidade das informações e a integridade do histórico criminal de cada preso. Isso não apenas simplifica o processo de monitoramento de pena, mas também aumenta a confiança na administração prisional ao garantir uma abordagem mais justa e transparente. Em última análise, essa iniciativa representa um avanço significativo na modernização do sistema carcerário, visando uma gestão mais eficaz e humanizada.
+*Implementação do Token para Fidelização*
+
+Para promover a fidelização dos agentes carcerários e incentivar a adesão ao Sistema Nacional de Administração Penitenciária (SNAP), implementamos um sistema de recompensas baseado em tokens, nomeado "FreedomChains" (FDC). O token FDC é uma ferramenta de motivação projetada para recompensar agentes pelo registro diligente e preciso de informações comportamentais de presidiários. Cada ação de registro no blockchain gera uma certa quantidade de tokens FDC para o agente responsável, que posteriormente podem ser trocados por benefícios tangíveis, como férias remuneradas extras. Esta abordagem não só melhora a qualidade dos dados inseridos no sistema como também engaja os agentes carcerários, transformando-os em participantes ativos e comprometidos com a precisão do sistema.
+
+- Escolha do Token e Tecnologia de Blockchain
+
+A escolha de implementar o token FDC através de um contrato inteligente ERC-20 foi guiada pela necessidade de uma solução robusta, escalável e integrada ao ecossistema Ethereum. Foi utilizado a ferramenta de criação rápida de contratos da [OpenZeppelin](https://www.openzeppelin.com/contracts). O contrato FDC permite a mintagem de tokens diretamente relacionados às ações dos agentes no sistema, garantindo uma distribuição justa e transparente das recompensas.
+O contrato pode ser visualizado abaixo:
+
+```solidity
+// SPDX-License-Identifier: MIT
+// Compatible with OpenZeppelin Contracts ^5.0.0
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FDC is ERC20, ERC20Burnable, Ownable {
+    constructor(address initialOwner)
+        ERC20("FreedomChains", "FDC")
+        Ownable(initialOwner)
+    {}
+
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+    }
+}
+```
+
+- Uso da API do Lumx Protocol
+
+A integração com a API do Lumx Protocol foi uma decisão estratégica crucial para o sucesso do projeto. O Lumx Protocol é conhecido por sua inovação e excelência tecnológica, oferecendo uma plataforma robusta e altamente segura para o desenvolvimento de aplicações blockchain. A escolha do Lumx Protocol permitiu-nos não apenas implementar funcionalidades complexas com facilidade mas também garantir a segurança e a confiabilidade do sistema de recompensas. A capacidade de interagir com o contrato para realizar operações de mint é um testemunho da flexibilidade e eficiência do Lumx Protocol. A API do Lumx se destaca pela sua interface intuitiva e pelo suporte excepcional, facilitando uma integração sem problemas e permitindo que nossa equipe se concentre em otimizar a experiência do usuário e a funcionalidade do sistema.
+
+Dessa forma,A introdução do token FDC dentro do SNAP criou um ambiente motivador para os agentes, incentivando a consistência e a precisão no registro de dados. Além disso, a tokenização das recompensas fortalece a transparência das operações, pois cada transação e acúmulo de tokens são registrados na blockchain, proporcionando uma visibilidade completa para os administradores do sistema e os próprios agentes.
+A implementação deste sistema de tokens não apenas alinha nossa iniciativa com os escopos modernos de fidelização e engajamento digital mas também redefine a maneira como as operações penitenciárias podem ser geridas, oferecendo um modelo replicável para outras instituições buscando modernizar e melhorar seus sistemas através da tecnologia blockchain.
+
+O uso de tokens como mecanismo de fidelização representa uma inovação significativa no campo da administração penitenciária, proporcionando um incentivo tangível para o aprimoramento contínuo do desempenho dos agentes. A parceria com o Lumx Protocol, apesar de alguns desafios técnicos, provou ser extremamente valiosa, permitindo-nos explorar novas fronteiras em tecnologia blockchain e segurança de dados, estabelecendo um novo padrão de eficácia e eficiência dentro do setor público.
+
+
+Em suma, a implementação do sistema de cadastro e monitoramento de presidiários dentro do contexto do Sistema Nacional de Administração Penitenciária (SNAP) demonstra como a tecnologia blockchain, aliada a contratos inteligentes e uma interface amigável como a MetaMask, pode revolucionar a transparência e eficiência na gestão penitenciária. Ao fornecer um portal transparente para atualização de dados dos detentos e registrar comportamentos através de smart contracts, o sistema promove a imutabilidade das informações e a integridade do histórico criminal de cada preso. Isso não apenas simplifica o processo de monitoramento de pena, mas também aumenta a confiança na administração prisional ao garantir uma abordagem mais justa e transparente. Em última análise, essa iniciativa representa um avanço significativo na modernização do sistema carcerário, visando uma gestão mais eficaz e humanizada, e garantindo uma eficácia por meio da fidelização dos clientes da solução.
 
 `<a name="detalhamentoAI"></a>`
 
@@ -422,10 +541,14 @@ A integração da inteligência artificial neste projeto de aplicação blockcha
 
 ### Scroll
 
-Contrato: 0xdF0e1E6101ec169Bd9d7D30ADFfB9a28cE6E2B41 `<br/>`
-Link do contrato no [Scroll Etherscan](https://sepolia.scrollscan.com/address/0xdF0e1E6101ec169Bd9d7D30ADFfB9a28cE6E2B41)
+Contrato: 0x13258E8be2e5b99A462f7F20b80035Bfcbe009f5 `<br/>`
+Link do contrato no [Scroll Etherscan](https://sepolia.scrollscan.com/address/0x6f152c6bf0a8c692e66fe7c1cf2c29b7d4ece37a)
 
 A Scroll é uma plataforma blockchain notavelmente eficiente, que se destaca pela sua viabilidade operacional. Optamos pela Scroll como alicerce do nosso projeto devido à sua rede extremamente estável e aos custos de gas fee reduzidos, elementos cruciais para uma implementação viável e prática em cenários da vida real. Esta escolha estratégica assegura que nossa aplicação seja não apenas sustentável, mas também amplamente acessível, democratizando o acesso a tecnologias de ponta em sistemas críticos de administração pública e garantindo uma solução inovadora que promete transformar a maneira como interagimos com infraestruturas estatais vitais.
+
+### Lumx
+
+A Lumx é uma plataforma de blockchain que se destaca por sua inovação e robustez, proporcionando um ambiente de desenvolvimento altamente eficiente para nossos projetos. Escolhemos a Lumx como base para nossa iniciativa devido à sua facilidade e intuitividade em lidar com tecnologias blockchain de maneira menos complexa, e mais agradável aos usuários e desenvolvedores. Esta decisão estratégica garante que nossa aplicação não só seja sustentável mas também altamente eficiente, democratizando o acesso a tecnologias avançadas em sistemas essenciais de administração pública e oferecendo uma solução inovadora que promete revolucionar a forma como as infraestruturas governamentais interagem e operam. A plataforma Lumx, com seu suporte exemplar e sua tecnologia de ponta, permite uma integração suave e uma operação confiável, garantindo que nosso projeto seja capaz de alcançar e superar suas metas com êxito.
 
 `<a name="nossaEquipe"></a>`
 
