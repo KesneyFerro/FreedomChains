@@ -1,4 +1,12 @@
 # Freedom Chains
+<br>
+
+[🇺🇸 Documentation](#USDocumentation)
+[🇧🇷 Documentation](#BRDocumentation)
+
+<br>
+
+<a name="USDocumentation"></a>
 
 ⚖️ Promoting justice and humanity in the Brazilian penal system, Freedom Chains offers a transparent, secure, and anonymous view of prisoners' behavioral history, strengthening the resocialization process and ensuring the rights of the incarcerated population.
 
@@ -11,6 +19,7 @@
 - 📈 [Market Analysis](#marketAnalysis): Understanding the extent of the market and how we can generate social impact through its needs.
 - 💻 [Technology Details](#technologyDetails): A deeper look at the technologies used in the development of the project.
 - 👁️ [Where to Look in the Code](#whereToLookInTheCode): A focused inspection guide to orient the reviewer to each of the bounties.
+- 📍 [Future Plans](#planosFuturos): A roadmap tohow we can improve our proposal.
 - 😎 [Our Team](#ourTeam): Meet our members.
 
 </br>
@@ -35,6 +44,7 @@ Moreover, it is crucial to address factors such as the lack of effective social 
 In summary, a comprehensive review of the Brazilian prison system is necessary, focusing on reducing criminal recidivism, improving living conditions in prisons, and promoting the rehabilitation and social reintegration of inmates. This includes measures such as access to education and work opportunities, encouraging a successful transition back into society.
 
 </br>
+
 <a name="ourIdea"></a>
 
 ## 🎯 Our Idea
@@ -62,7 +72,7 @@ Thus, the solution proposed by Freedom Chains emerges as a powerful response to 
 
 Therefore, more than just technical efficiency, this solution reflects a deep commitment to the principles of justice, respect for human rights, and the dignity of all individuals, regardless of their incarceration situation. By promoting transparency, impartiality, and efficacy of the judicial system, Freedom Chains significantly contributes to building a more just and inclusive society. At its core is the belief that each person deserves the opportunity to seek their reintegration into the community in a dignified and equitable manner.
 
-`<a name="marketAnalysis"></a>`
+<a name="marketAnalysis"></a>
 
 ## 📈 Market Analysis
 
@@ -73,7 +83,7 @@ Therefore, more than just technical efficiency, this solution reflects a deep co
 
 <br>
 
-`<a name="SWOTAnalysis"></a>`
+<a name="SWOTAnalysis"></a>
 
 ### SWOT Analysis
 
@@ -110,7 +120,7 @@ The SWOT analysis is a strategic tool used to evaluate the strengths, weaknesses
 
 In conclusion, although there are challenges to be overcome, Freedom Chains is well-positioned to capitalize on its strengths and opportunities, while proactively facing its weaknesses and threats. With a strategic approach and a continuous focus on innovation and adaptation, the application can consolidate itself as the main means of fair management of inmates.
 
-`<a name="valuePropositionCanvas"></a>`
+<a name="valuePropositionCanvas"></a>
 
 ### Value Proposition Canvas
 
@@ -171,7 +181,7 @@ By integrating the blockchain platform into the prison system, administrators wi
 
 The detailed analysis of the Value Proposition Canvas reveals a robust and innovative solution for the challenges faced by prison systems. By integrating blockchain technology, the proposed platform seeks not only to modernize but also to fundamentally reform inmate management, offering unprecedented transparency, security, and efficiency. With a clear focus on customer benefits, the proposal aims to alleviate the pains faced by prison agents and administrators, providing a reliable and transparent solution for managing sensitive data. At the same time, it offers tangible gains, such as increased fairness in the treatment of inmates, transparency for friends and family, and improved regulatory compliance.
 
-`<a name="technologyDetails"></a>`
+<a name="technologyDetails"></a>
 
 ## 💻 Technology Details
 
@@ -182,7 +192,7 @@ The detailed analysis of the Value Proposition Canvas reveals a robust and innov
 
 <br>
 
-`<a name="blockchainDetailing"></a>`
+<a name="blockchainDetailing"></a>
 
 ### Blockchain
 
@@ -403,6 +413,8 @@ Using tokens as a loyalty mechanism represents a significant innovation in penit
 
 In summary, implementing the prisoner registration and monitoring system within the context of the National Penitentiary Administration System (SNAP) demonstrates how blockchain technology, combined with smart contracts and a user-friendly interface like MetaMask, can revolutionize transparency and efficiency in penitentiary management. By providing a transparent portal for updating inmate data and recording behaviors through smart contracts, the system promotes the immutability of information and the integrity of each prisoner's criminal history. This not only simplifies the monitoring process but also enhances trust in prison administration by ensuring a fairer and more transparent approach. Ultimately, this initiative represents a significant advance in modernizing the prison system, aiming for more effective and humane management, and ensuring effectiveness through customer loyalty.
 
+<a name="AIDetailing"></a>
+
 ### Artificial Intelligence
 
 The project benefits from integrating artificial intelligence (AI) in a blockchain application project aimed at generating reports on inmates. AI is used to process comments from prison officers and generate standardized reports, providing valuable insights into inmate behavior.
@@ -520,6 +532,8 @@ For the development of the backend related to the LLM, the following technologie
 
 The integration of artificial intelligence in this blockchain application project brings significant benefits by automating the report generation process about inmates. This not only increases operational efficiency but also provides valuable insights to assist in penitentiary management decisions. AI contributes to a more proactive and informed approach in treating and monitoring inmates, promoting better outcomes in resocialization and social reintegration.
 
+<a name="futurePlans"></a>
+
 ## 📍 Future Plans
 
 *Expansion of Functional Coverage:*
@@ -542,6 +556,8 @@ The integration of artificial intelligence in this blockchain application projec
 *Geographic Expansion:*
 - *Adaptation for Other Legal Systems:* Adapt the software to be compatible with prison systems of other countries, considering their specific laws and regulations.
 
+<a name="whereToLookInTheCode"></a>
+
 ## 👁️ Where to Look in the Code
 
 ### Scroll
@@ -554,6 +570,8 @@ Scroll is a notably efficient blockchain platform, distinguished by its operatio
 ### Lumx
 
 Lumx is a blockchain platform that stands out for its innovation and robustness, providing a highly efficient development environment for our projects. We chose Lumx as the basis for our initiative due to its ease and intuitiveness in dealing with blockchain technologies in a less complex and more user-friendly manner. This strategic decision ensures that our application is not only sustainable but also highly efficient, democratizing access to advanced technologies in essential public administration systems and offering an innovative solution that promises to revolutionize how government infrastructures interact and operate. Lumx, with its exemplary support and cutting-edge technology, allows for smooth integration and reliable operation, ensuring that our project can achieve and exceed its goals successfully.
+
+<a name="ourTeam"></a>
 
 ## 😎 Our Team
 
@@ -601,6 +619,15 @@ zHrOdrL0zVncI" width="100px;" alt="Kesney Lucas profile image"/><br>
 
 # Freedom Chains
 
+<br>
+
+[🇺🇸 Documentation](#USDocumentation)
+[🇧🇷 Documentation](#BRDocumentation)
+
+<br>
+
+<a name="BRDocumentation"></a>
+
 ⚖️ Promovendo justiça e humanidade no sistema penal brasileiro, Freedom Chain oferece uma visão transparente, segura e anônima do histórico comportamental dos presos, fortalecendo o processo de ressocialização e garantindo os direitos da população carcerária.
 
 ⚙️ Solução desenvolvida usando NextJS, ReactJs, Typescript, Scroll
@@ -612,6 +639,7 @@ zHrOdrL0zVncI" width="100px;" alt="Kesney Lucas profile image"/><br>
 - 📈 [Análise de Mercado](#analiseDeMercado): Entendendo a extensão do mercado e como podemos, por meio das necessidades desse mercado gerar impacto social.
 - 💻 [Detalhamento de Tecnologias](#detalhamentoDeTecnologias): Uma visão mais aprofundada das tecnologias utilizadas no desenvolvimento do projeto
 - 👁️ [Onde olhar no código](#ondeOlharNoCodigo): Um guia de inspeção focado em orientar o revisor para cada uma das *bounties*.
+- 📍 [Planos Futuros](#planosFuturos): Uma prospecção de como podemos melhorar a nossa proposta.
 - 😎 [Nossa Equipe](#nossaEquipe): Conheça os nossos membros.
 
 </br>
@@ -664,7 +692,7 @@ Assim, a solução proposta pelo Freedom Chains emerge como uma resposta poderos
 
 Portanto, mais do que apenas eficiência técnica, essa solução reflete um compromisso profundo com os princípios de justiça, respeito aos direitos humanos e dignidade de todos os indivíduos, independentemente de sua situação de encarceramento. Ao promover a transparência, a imparcialidade e a eficácia do sistema judiciário, o Freedom Chains contribui de forma significativa para a construção de uma sociedade mais justa e inclusiva. Em seu cerne, está a crença de que cada pessoa merece a oportunidade de buscar sua reintegração à comunidade de forma digna e equitativa.
 
-`<a name="analiseDeMercado"></a>`
+<a name="analiseDeMercado"></a>
 
 ## 📈 Análise de Mercado
 
@@ -675,7 +703,7 @@ Portanto, mais do que apenas eficiência técnica, essa solução reflete um com
 
 <br>
 
-`<a name="analiseSWOT"></a>`
+<a name="analiseSWOT"></a>
 
 ### Análise SWOT
 
@@ -718,7 +746,7 @@ A análise SWOT é uma ferramenta estratégica utilizada para avaliar os pontos 
 
 Em conclusão, embora haja desafios a serem superados, a FreedomChains está bem posicionada para capitalizar suas forças e oportunidades, enquanto enfrenta de forma proativa suas fraquezas e ameaças. Com uma abordagem estratégica e um foco contínuo na inovação e na adaptação, a aplicação pode se consolidar como o principal meio de gestão justa de presidiários.
 
-`<a name="#canvasDePropostaDeValor"></a>`
+<a name="#canvasDePropostaDeValor"></a>
 
 ### Canvas de Proposta de Valor
 
@@ -785,7 +813,7 @@ Ao integrar a plataforma blockchain no sistema prisional, os administradores pod
 
 A análise detalhada do Canva de Proposta de Valor revela uma solução robusta e inovadora para os desafios enfrentados pelos sistemas prisionais. Ao integrar tecnologia blockchain, a plataforma proposta busca não apenas modernizar, mas também reformar fundamentalmente a gestão de detentos, oferecendo transparência, segurança e eficiência sem precedentes.Com um foco claro nos benefícios para os clientes, a proposta visa aliviar as dores enfrentadas por agentes e administradores prisionais, proporcionando uma solução confiável e transparente para o gerenciamento de dados sensíveis. Ao mesmo tempo, oferece ganhos tangíveis, como aumento da equidade no tratamento dos detentos, transparência para familiares e amigos, e melhoria da conformidade regulatória.
 
-`<a name="detalhamentoDeTecnologias"></a>`
+<a name="detalhamentoDeTecnologias"></a>
 
 ## 💻 Detalhamento de Tecnologias
 
@@ -796,7 +824,7 @@ A análise detalhada do Canva de Proposta de Valor revela uma solução robusta 
 
 <br>
 
-`<a name="detalhamentoBlockchain"></a>`
+<a name="detalhamentoBlockchain"></a>
 
 ### Blockchain
 
@@ -1016,7 +1044,7 @@ O uso de tokens como mecanismo de fidelização representa uma inovação signif
 
 Em suma, a implementação do sistema de cadastro e monitoramento de presidiários dentro do contexto do Sistema Nacional de Administração Penitenciária (SNAP) demonstra como a tecnologia blockchain, aliada a contratos inteligentes e uma interface amigável como a MetaMask, pode revolucionar a transparência e eficiência na gestão penitenciária. Ao fornecer um portal transparente para atualização de dados dos detentos e registrar comportamentos através de smart contracts, o sistema promove a imutabilidade das informações e a integridade do histórico criminal de cada preso. Isso não apenas simplifica o processo de monitoramento de pena, mas também aumenta a confiança na administração prisional ao garantir uma abordagem mais justa e transparente. Em última análise, essa iniciativa representa um avanço significativo na modernização do sistema carcerário, visando uma gestão mais eficaz e humanizada, e garantindo uma eficácia por meio da fidelização dos clientes da solução.
 
-`<a name="detalhamentoAI"></a>`
+<a name="detalhamentoAI"></a>
 
 ### Inteligência Artificial
 
@@ -1136,6 +1164,7 @@ Para o desenvolvimento do back-end relacionado ao LLM, foram utilizadas as segui
 
 A integração da inteligência artificial neste projeto de aplicação blockchain traz benefícios significativos ao automatizar o processo de geração de relatórios sobre detentos. Isso não só aumenta a eficiência operacional, mas também fornece insights valiosos para auxiliar nas decisões de gestão penitenciária. A IA contribui para uma abordagem mais proativa e informada no tratamento e acompanhamento dos detentos, promovendo melhores resultados de ressocialização e reintegração social.
 
+<a name="planosFuturos"></a>
 
 ## 📍 Planos Futuros
 
@@ -1162,7 +1191,7 @@ A integração da inteligência artificial neste projeto de aplicação blockcha
 
 
 
-`<a name="ondeOlharNoCodigo"></a>`
+<a name="ondeOlharNoCodigo"></a>
 
 ## 👁️ Onde Olhar no Código
 
@@ -1177,7 +1206,7 @@ A Scroll é uma plataforma blockchain notavelmente eficiente, que se destaca pel
 
 A Lumx é uma plataforma de blockchain que se destaca por sua inovação e robustez, proporcionando um ambiente de desenvolvimento altamente eficiente para nossos projetos. Escolhemos a Lumx como base para nossa iniciativa devido à sua facilidade e intuitividade em lidar com tecnologias blockchain de maneira menos complexa, e mais agradável aos usuários e desenvolvedores. Esta decisão estratégica garante que nossa aplicação não só seja sustentável mas também altamente eficiente, democratizando o acesso a tecnologias avançadas em sistemas essenciais de administração pública e oferecendo uma solução inovadora que promete revolucionar a forma como as infraestruturas governamentais interagem e operam. A plataforma Lumx, com seu suporte exemplar e sua tecnologia de ponta, permite uma integração suave e uma operação confiável, garantindo que nosso projeto seja capaz de alcançar e superar suas metas com êxito.
 
-`<a name="nossaEquipe"></a>`
+<a name="nossaEquipe"></a>
 
 ## 😎 Nossa Equipe
 
