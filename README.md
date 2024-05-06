@@ -1,5 +1,397 @@
 # Freedom Chains
 
+⚖️ Promoting justice and humanity in the Brazilian penal system, Freedom Chains offers a transparent, secure, and anonymous view of prisoners' behavioral history, strengthening the resocialization process and ensuring the rights of the incarcerated population.
+
+⚙️ Solution developed using NextJS, ReactJs, TypeScript, Scroll
+
+## Index
+
+- 🌐 [General Scenario](#generalScenario): A perspective on the general scenario of the Brazilian prison system.
+- 🎯 [Our Idea](#ourIdea): From the general perspective, how Freedom Chains intends to ensure a fair and humanitarian penal process.
+- 📈 [Market Analysis](#marketAnalysis): Understanding the extent of the market and how we can generate social impact through its needs.
+- 💻 [Technology Details](#technologyDetails): A deeper look at the technologies used in the development of the project.
+- 👁️ [Where to Look in the Code](#whereToLookInTheCode): A focused inspection guide to orient the reviewer to each of the bounties.
+- 😎 [Our Team](#ourTeam): Meet our members.
+
+</br>
+<a name="generalScenario"></a>
+
+## 🌐 General Scenario
+
+The Brazilian prison system is a complex and multifaceted issue that prompts discussions about justice, human rights, and the effectiveness of public policies. With one of the largest prison populations in the world, Brazil faces significant challenges related to overcrowding, violence, criminal recidivism, and adequate access to basic rights for detainees.
+
+In this context, it is crucial to analyze and understand data related to detainees in the country, in order to identify trends, challenges, and opportunities for improvement in the prison system. This allows us to present a general overview of the most recent numbers and statistics about the Brazilian prison population, including information about the demographic profile of detainees, average prison time, incidence of provisional detention, and other relevant issues for the discussion about the criminal justice system.
+
+Regarding detainees, according to the [Penal Information Report of 2023.2 (RELIPEN)](https://www.gov.br/senappen/pt-br/servicos/sisdepen/relatorios/relipen/relipen-2-semestre-de-2023.pdf), about 40% of all Brazilian prisoners are provisional detainees, meaning they have not yet been tried and sentenced, thus are detained provisionally and indefinitely. When talking about convicted inmates, the largest portions have total sentences between 20 and 100 years, of these, a large part still needs to serve more than 20 years in prison. Additionally, it is worth mentioning that, according to Brazilian legislation, convicted detainees can only serve a maximum of 30 years in prison, regardless of the time they were sentenced to.
+
+It is worth pointing out that there are two [types of provisional detention](https://www.defensoriapublica.pr.def.br/Noticia/Quais-tipos-de-prisao-existem-no-Brasil): preventive detention and temporary detention. Preventive detention is ordered during the course of a criminal process, before the final judgment of the defendant. It aims to ensure public order, the convenience of criminal instruction, or the application of criminal law. It is generally used when there are indications that the accused may obstruct the investigation, flee justice, or represent a risk to society. On the other hand, temporary detention is a more specific precautionary measure, ordered in specific cases and for a determined period of up to 90 days, extendable in exceptional cases. It is applied during the investigation phase, allowing the police authority to gather evidence and clarify the facts. Both types of provisional detention are regulated by specific laws and must be used in a cautious and proportional manner, respecting the fundamental rights of the accused.
+
+As for inmate rehabilitation programs, there are [3 ways to reduce a detainee's sentence](https://www.jusbrasil.com.br/artigos/3-formas-de-diminuir-a-pena-de-quem-esta-preso/1722654342) through educational and beneficial actions for the inmate. Firstly, if the inmate reads a book and writes a report about it, they receive a sentence remission of 3 days. Secondly, if they study, for every 12 hours of study they receive a sentence remission of 1 day. Lastly, if they work, for every 2 days of work they receive a sentence remission of 1 day.
+
+In Brazil, the prison system faces [significant challenges](https://www.clp.org.br/uma-analise-do-sistema-prisional-brasileiro-problemas-e-solucoes/) that deserve our attention and action. Instead of being an environment for rehabilitation and justice, prisons often become places of rights deprivation and perpetuation of injustices. It is essential to recognize that rehabilitation programs are not always adequate, prioritizing punishment over the personal development of the inmate and their preparation for reintegration into society. This can contribute to a worrying cycle of criminal recidivism after release.
+
+Moreover, it is crucial to address factors such as the lack of effective social rehabilitation programs, inequality, and discrimination, which contribute to the cycle of criminality. Without significant actions to reintegrate inmates into society, it is likely that many will return to crime after release.
+
+In summary, a comprehensive review of the Brazilian prison system is necessary, focusing on reducing criminal recidivism, improving living conditions in prisons, and promoting the rehabilitation and social reintegration of inmates. This includes measures such as access to education and work opportunities, encouraging a successful transition back into society.
+
+</br>
+<a name="ourIdea"></a>
+
+## 🎯 Our Idea
+
+### The Problem
+
+Given the general context of the Brazilian prison system, it is evident that it faces a series of challenges that directly impact the lives of individuals in incarceration, often resulting in unjustified prolongations of their sentences. These challenges include:
+
+1. **Prejudice**: The incarcerated population faces significant stigmatization and discrimination from society in general, which can negatively influence judicial decisions and the execution of sentences. Prejudice can lead to unequal treatments before the law, harming the pursuit of justice and respect for human rights.
+2. **Corruption**: Corruption within the judicial and prison system can distort legal processes, resulting in unfair decisions and favoring certain individuals over others. Corruption can be present from the initial phase of the process to the execution of sentences, compromising the efficacy and integrity of the system.
+3. **Justice in Judgment**: The slowness and lack of transparency in judicial processes often result in prolonged preventive detentions and delays in the granting of release warrants. The sluggishness of the judicial system can lead to the imprisonment of individuals who are later found innocent or who have their sentences exceeding the necessary time, violating the principle of the presumption of innocence and the proportionality of sentences.
+4. **Ease of Family Monitoring of the Prisoner's Situation**: The difficulty of access and communication between prisoners and their families makes it even more challenging to monitor the situation of the detainees. The lack of efficient communication channels can cause anguish and uncertainty among family members, making it difficult to provide the necessary assistance and support during the period of incarceration.
+
+In summary, the challenges presented in the Brazilian prison system highlight the urgent need for structural reforms that ensure the efficacy of the judicial system, respect for human rights, and the promotion of the resocialization of inmates. Overcoming these obstacles requires not only legislative and policy measures but also a change in the model that values justice, transparency, and respect for the dignity of all individuals, regardless of their incarceration condition.
+
+### Solution
+
+In the context of the Brazilian prison system, Freedom Chains seeks to ensure that the resocialization process for inmates is more humane and transparent, aiming to remove possible biases. To address these problems, blockchain technology is used as a base, enabling the creation of a transparent portal for viewing the remaining time of sentence completion, behavioral histories, and rehabilitation indicators for future hearings. Through the creation of smart contracts, the Freedom Chains system adds unique identifiers for each inmate and associates them with behavioral smart contracts that carry reports made by prison agents to indicate good and bad behavior of an inmate, aiming to build a report that will serve as an indicator of fitness for resocialization.
+
+In this solution, the [use of blockchain to solve the problem](#blockchainDetailing) is based on three pillars of this technology: transparency, immutability, and decentralization. Through blockchain, it is possible to ensure the integrity of the processes for evaluating inmate engagement with the rehabilitation process, as reports indicating life experiences in prison allow the verification of the validity and congruence of the evaluative process of the sentence. Thus, the use of a decentralization tool favors the reduction of systematic corruption in the Brazilian prison system, while ensuring greater agility in hearing processes, as the reports allow a more substantiated analysis of the case in question.
+
+To ensure that the reports facilitate the analysis process by the judiciary, [LLM models](#AIDetailing) are used to convert the reports of good and bad behaviors associated with an inmate into a new report that groups comments and synthesizes the resocialization progress of the incarcerated through markers. In this way, the LLM model converts onchain data into analytical markers that facilitate the analysis of the inmate's profile and compose a behavioral dossier for different instances of judgment for reduction or increase in sentence.
+
+Thus, the solution proposed by Freedom Chains emerges as a powerful response to the [challenges faced by the Brazilian prison system](https://www.clp.org.br/uma-analise-do-sistema-prisional-brasileiro-problemas-e-solucoes/). By employing blockchain technologies and advanced analytical models, this platform seeks not only to mitigate prejudices and combat corruption but also to ensure transparency and justice in the resocialization process of inmates. With this innovative approach, offering a tool to transparently track the completion of sentences and the progress of rehabilitation of prisoners, Freedom Chains enables a more substantiated and impartial analysis by the courts. This, in turn, reduces injustices and ensures that sentences are applied in a fair and proportional manner, strengthening the foundations of the judicial system.
+
+Therefore, more than just technical efficiency, this solution reflects a deep commitment to the principles of justice, respect for human rights, and the dignity of all individuals, regardless of their incarceration situation. By promoting transparency, impartiality, and efficacy of the judicial system, Freedom Chains significantly contributes to building a more just and inclusive society. At its core is the belief that each person deserves the opportunity to seek their reintegration into the community in a dignified and equitable manner.
+
+`<a name="marketAnalysis"></a>`
+
+## 📈 Market Analysis
+
+<br>
+
+1. [SWOT Analysis](#SWOTAnalysis) - What is the internal and external environment of operation in the Brazilian prison system?
+2. [Value Proposition Canvas](#valuePropositionCanvas) - Why is Freedom Chains the right path for resocialization processes?
+
+<br>
+
+`<a name="SWOTAnalysis"></a>`
+
+### SWOT Analysis
+
+The SWOT analysis is a strategic tool used to evaluate the strengths, weaknesses, opportunities, and threats of a company, project, or specific situation. It serves to provide a comprehensive view of an organization's internal and external environment, allowing for the identification of areas for improvement, competitive advantages, potential risks, and opportunities for growth. The SWOT analysis is important because it assists in formulating more effective strategies, making informed decisions, and developing action plans that leverage the organization's strengths and minimize its weaknesses, while seeking to capitalize on opportunities and mitigate external threats. Given this importance, here is the SWOT analysis of Freedom Chains in Figure 1:
+
+<div align="center">
+<sub><a name="f2"></a>SWOT Analysis (EN)</sub>
+<img src="assets/EN-SWOT.png" width="100%">
+<sup>Source: Material produced by the authors (2024)</sup>
+</div>
+
+**Strengths:**
+
+- Data Security and Immutability: Using the blockchain Scroll, the system ensures that data is stored securely and permanently, without the possibility of alteration or adulteration.
+- Operational Transparency: Blockchain technology provides a high level of transparency, allowing all transactions to be accessible and verifiable by authorized parties, strengthening trust in the system.
+- Easy Implementation and Usability: The efficiency of the blockchain Scroll in terms of very low transaction fees, facilitating the real implementation of the project with low concern for gas fees, compared to conventional systems.
+- Flexible Adaptation and Integration: The ability to integrate with existing systems and adapt to specific regulations makes the system versatile and applicable in various jurisdictions.
+
+**Weaknesses:**
+
+- Technological Complexity: Although the use of blockchain is an advance into the future, the complex nature of blockchain can be a barrier at the current time in which Brazil is, especially in adoption by non-technical users, such as prison administrators who may have limitations in understanding and operating the technology.
+- Dependence on Massive Adoption: The efficacy of the system depends on the consistent adoption and use by all involved parties, from prison system employees to regulatory bodies. Clearly, this is an issue that can be overcome by clarifying all the advantages of the platform, however, it is a point that should not be ignored.
+
+**Opportunities:**
+
+- Growth in Blockchain Adoption in Government Sectors: With the increasing interest and confidence in blockchain technologies by government sectors, there is a significant opportunity for expansion and establishment as a market leader in technological solutions for prison administration.
+- Strategic Partnerships: Establishing partnerships with government agencies and international organizations can facilitate implementation and promote favorable regulatory standards.
+- International Expansion: Exploring international markets where prison management faces similar challenges can broaden the reach and applicability of the system.
+
+**Threats:**
+
+- Resistance to Change: The hesitation or opposition to abandoning traditional systems by established institutions may limit the adoption of the new technology in this first instance.
+- Government Regulations: Unexpected regulatory changes or strict regulations regarding blockchain as a whole can affect the implementation and operation of the system.
+
+In conclusion, although there are challenges to be overcome, Freedom Chains is well-positioned to capitalize on its strengths and opportunities, while proactively facing its weaknesses and threats. With a strategic approach and a continuous focus on innovation and adaptation, the application can consolidate itself as the main means of fair management of inmates.
+
+`<a name="valuePropositionCanvas"></a>`
+
+### Value Proposition Canvas
+
+The Value Proposition Canvas is a visual and strategic tool used for the development of products, solutions, and projects. This utility focuses on ensuring that a proposed solution meets the needs and desires of the customers. It helps map and understand the benefits that the proposed solution should offer to meet customer requests and create significant gains for them.
+
+<div align="center">
+<sub><a name="f2"></a>Value Proposition Canvas (EN)</sub>
+<img src="assets/EN-ValuePropositionCanvas.png" width="100%">
+<sup>Source: Material produced by the authors (2024)</sup>
+</div>
+
+**In the "Customer Segments" section, the three main components presented seek to bring the role of the customer in the current business model and how the solution can impact them.**
+
+1. Customer Jobs:
+
+- Ensure that all operations and procedures comply with national and international laws and regulations.
+
+  Currently, prison agents and administrators face the challenge of managing sensitive and confidential data securely and efficiently, often dealing with outdated systems that do not offer data integrity guarantees and without guarantees of transparency or immutability.
+
+2. Pains:
+
+- Difficulties in maintaining transparent and traceable processes, increasing the risk of corruption.
+- Concerns about data integrity and the risk of information manipulation.
+- Slowness in the process of responding to requests due to bureaucracy in the analysis process by different sectors.
+
+  The lack of a reliable and transparent system can result in operational inefficiencies and failures in the administration of justice, in addition to increasing the risk of corruption and data manipulation in the prison system. Moreover, having a more straightforward, efficient, and transparent platform can assist in raising information to speed up processes.
+
+3. Gains:
+
+- Increased capacity to manage inmates more fairly and equitably.
+- Transparency for friends and family to monitor the prisoner's history.
+- Improvement in compliance with regulations and the security of managed data.
+
+**In the "Value Proposition" section, there are three main components highlighted in the figure, which seek to bring the role of the corporation in the proposed business model.**
+
+1. Products and Services:
+
+- Blockchain-Based Platform for Inmate Management: The platform serves as an immutable and transparent record of inmate information, allowing the consistent and secure monitoring of penitentiary records.
+
+  The platform functions as a distributed ledger that stores detailed data about inmates, including behavioral history, rehabilitation progress, and important sentence review dates, all accessible in real-time to facilitate the effective administration of the prison system.
+
+2. Gain Creators:
+
+- Provides secure and instant access to inmate information for authorized agents.
+- Increases the effectiveness and fairness in the treatment of inmates, positively influencing the penitentiary system.
+- Facilitates compliance with legal regulations and increases accountability in the handling of inmates.
+
+  By using a blockchain-based platform, the project aims to provide a reliable and secure way to access and record information, which is crucial for the fair operation of the prison system. Additionally, by reducing the need for manual interactions and bureaucratic processes, the platform optimizes resources and decreases expenses.
+
+3. Pain Relievers:
+
+- Protects against manipulations and forgeries in inmate records.
+- Solves the problem of lack of transparency in penitentiary records.
+
+  Blockchain technology ensures that each transaction is recorded securely and permanently, providing an indisputable source of truth.
+
+By integrating the blockchain platform into the prison system, administrators will be able to access a tool that not only facilitates record management but also reinforces trust in the system, providing a verifiable and transparent way to track the trajectory and behavior of inmates, contributing significantly to reform and continuous improvement of penitentiary practices. Additionally, the law must undoubtedly be followed, given that all records will be deployed and cannot be hidden.
+
+The detailed analysis of the Value Proposition Canvas reveals a robust and innovative solution for the challenges faced by prison systems. By integrating blockchain technology, the proposed platform seeks not only to modernize but also to fundamentally reform inmate management, offering unprecedented transparency, security, and efficiency. With a clear focus on customer benefits, the proposal aims to alleviate the pains faced by prison agents and administrators, providing a reliable and transparent solution for managing sensitive data. At the same time, it offers tangible gains, such as increased fairness in the treatment of inmates, transparency for friends and family, and improved regulatory compliance.
+
+`<a name="technologyDetails"></a>`
+
+## 💻 Technology Details
+
+<br>
+
+1. [Blockchain Usage Details](#blockchainDetailing) - How did Freedom Chains apply blockchain to enhance the security and transparency of the prison system?
+2. [Artificial Intelligence Usage Details](#AIDetailing) - How did Freedom Chains use Artificial Intelligence to facilitate the monitoring of the resocialization process of people in incarceration?
+
+<br>
+
+`<a name="blockchainDetailing"></a>`
+
+### Blockchain
+
+In the context of the National Prison Administration System (SNAP), the system for registration and verification of prisoners seeks to address challenges related to the transparency of an inmate's penal information. To address these problems, blockchain technology is used as a base, enabling the creation of a transparent portal for updating inmate data. Through the use of smart contracts, the owner allows authorized and verified prison agents, through the confirmation of identity and credentials, to add to the inmates their initial ID registrations and behavioral information capable of altering the expected length of the sentence. Thus, the criminal history data of each inmate can be collected by the agents and added to the blockchain through smart contracts, ensuring the immutability of that information and transparency in the sentence monitoring process.
+
+In this perspective, for the implementation of this project, it was necessary to create a smart contract capable of storing ID information, dates of imprisonment and expected end of sentence, indicators of good/bad behavior along with comments justifying them. For this, the language `Solidity` was used as the main technology; in addition, it was naturally necessary to deploy this contract using `EVM` technology through [Remix](https://remix.ethereum.org).
+
+**System Characteristics**
+
+*Data Launch to Blockchain*
+
+The registration and monitoring system uses blockchain technology to ensure the immutability and transparency of the records. The main data recorded includes:
+- Prisoner ID: Unique identification for each inmate.
+- Date of Imprisonment: Timestamp of the start date of detention.
+- Expected Release: Timestamp of the expected release date.
+- Detention Status: Indicator if the prisoner is currently detained or not.
+- Behavior Records: Entries documenting the inmate's behavior, which may include "Good Behavior" or "Bad Behavior," with relevant comments.
+
+*Access Control*
+
+To ensure that only authorized agents manipulate the information of the inmates, the system implements strict access control. The contract administrator (owner) has the ability to authorize or revoke access for specific wallets, ensuring that only qualified and approved personnel can add or change the records. This security layer is vital to maintaining the integrity and confidentiality of the inmates' data.
+
+*Display Filtered Data*
+
+The application can pull data already deployed on the blockchain and bring it back with filters, aiming to assist user visualization. The data return functions include:
+- List all IDs registered in the system along with all information attached to the inmate.
+- List the entire history of an inmate with a searchable ID, making it possible to identify points of good/bad behavior and a comment that justifies it.
+- View the record of inmates along with their dates of imprisonment and expected end of sentence.
+
+These functionalities can meet the difficulties found in the process, fulfilling the objective of the solution. For this, a smart contract was developed.
+
+The contract can be viewed below:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.24;
+
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+/**
+ * @title PrisonerManagementSystem
+ * @dev This contract manages basic information and behavior records of inmates,
+ * with access restrictions controlled by the contract owner.
+ */
+contract PrisonerManagementSystem is Ownable {
+    struct PrisonerInfo {
+        uint256 id;
+        uint256 prisonDate;
+        uint256 releaseDate;
+        bool isDetained;
+        address createdBy;
+        bytes32 transactionHash;
+    }
+
+    struct BehaviorRecord {
+        uint256 date;
+        string behavior;
+        string comment;
+    }
+
+    uint256[] private prisonerIds;  
+    mapping(uint256 => PrisonerInfo) public prisonerInfo;
+    mapping(uint256 => BehaviorRecord[]) public behaviorRecords;
+    mapping(address => bool) public authorized;  
+    address[] private authorizedAddresses;  
+
+    event PrisonerInfoRegistered(
+        uint256 indexed prisonerId,
+        uint256 prisonDate,
+        uint256 releaseDate,
+        bool isDetained,
+        address createdBy,
+        bytes32 transactionHash
+    );
+    event BehaviorRecordAdded(uint256 indexed prisonerId, string behavior, string comment);
+    event AuthorizationUpdated(address indexed agent, bool isAuthorized);
+    event NewPrisonerID(uint256 prisonerId);  
+
+    constructor() Ownable(0xe56F3e90B6faB303B191f8195Df3933f88aad297) {
+        authorized[msg.sender] = true; 
+        authorizedAddresses.push(msg.sender);  // Add the owner to the array of authorized addresses
+    }
+
+    modifier onlyAuthorized() {
+        require(authorized[msg.sender], "You are not authorized to perform this action");
+        _;
+    }
+
+    function authorizeAgent(address _agent, bool _isAuthorized) public onlyOwner {
+        authorized[_agent] = _isAuthorized;
+        if (_isAuthorized && !isAlreadyAuthorized(_agent)) {
+            authorizedAddresses.push(_agent);
+        } else if (!_isAuthorized) {
+            removeAuthorizedAddress(_agent);
+        }
+        emit AuthorizationUpdated(_agent, _isAuthorized);
+    }
+
+    function getAuthorizedAddresses() public view returns (address[] memory) {
+        return authorizedAddresses;
+    }
+
+    function isAlreadyAuthorized(address _agent) private view returns (bool) {
+        for (uint i = 0; i < authorizedAddresses.length; i++) {
+            if (authorizedAddresses[i] == _agent) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function removeAuthorizedAddress(address _agent) private {
+        uint index = 0;
+        bool found = false;
+        for (uint i = 0; i < authorizedAddresses.length; i++) {
+            if (authorizedAddresses[i] == _agent) {
+                index = i;
+                found=true;
+                break;
+            }
+        }
+        if (found) {
+            authorizedAddresses[index] = authorizedAddresses[authorizedAddresses.length - 1];
+            authorizedAddresses.pop();
+        }
+    }
+
+      function registerPrisonerInfo(uint256 _id, uint256 _prisonDate, uint256 _releaseDate, bool _isDetained) public onlyAuthorized {
+        PrisonerInfo memory info = PrisonerInfo({
+            id: _id,
+            prisonDate: _prisonDate,
+            releaseDate: _releaseDate,
+            isDetained: _isDetained,
+            createdBy: msg.sender,
+            transactionHash: bytes32(0) // Placeholder for actual transaction hash retrieval
+        });
+        prisonerInfo[_id] = info;
+        prisonerIds.push(_id);
+        emit PrisonerInfoRegistered(_id, _prisonDate, _releaseDate, _isDetained, msg.sender, bytes32(0));
+        emit NewPrisonerID(_id);
+    }
+
+    function getAllPrisonerDetails() public view returns (PrisonerInfo[] memory) {
+        PrisonerInfo[] memory details = new PrisonerInfo[](prisonerIds.length);
+        for (uint256 i = 0; i < prisonerIds.length; i++) {
+            uint256 id = prisonerIds[i];
+            details[i] = prisonerInfo[id];
+        }
+        return details;
+    }
+
+       function addBehaviorRecord(uint256 _id, string memory _behavior, string memory _comment) public onlyAuthorized {
+        behaviorRecords[_id].push(BehaviorRecord({
+            date: block.timestamp,
+            behavior: _behavior,
+            comment: _comment
+        }));
+        emit BehaviorRecordAdded(_id, _behavior, _comment);
+    }
+
+    function getPrisonerInfo(uint256 _id) public view returns (PrisonerInfo memory) {
+        return prisonerInfo[_id];
+    }
+
+     function getBehaviorRecords(uint256 _id) public view returns (BehaviorRecord[] memory) {
+        return behaviorRecords[_id];
+    }
+
+    function getAllPrisonerIDs() public view returns (uint256[] memory) {
+        return prisonerIds;
+    }
+}
+
+```
+
+Moreover, MetaMask was chosen as the digital wallet technology, serving as a means for deployment directly on the Scroll test network. Within the project, it also acts as a gateway to allow users to interact with the Ethereum blockchain directly from their web browsers. It is an essential tool for facilitating secure access, providing a user-friendly interface to authenticate deployments. This significantly simplifies the interaction of prison agents with the system, allowing them to perform transactions and queries without requiring deep technical knowledge about smart contracts or blockchain.
+
+- Implementation of the Token for Loyalty
+
+To promote the loyalty of prison agents and encourage adherence to the National Prison Administration System (SNAP), we implemented a reward system based on tokens, named "FreedomChains" (FDC). The FDC token is a motivation tool designed to reward agents for the diligent and accurate registration of behavioral information of inmates. Each action of registration on the blockchain generates a certain amount of FDC tokens for the responsible agent, which can later be exchanged for tangible benefits, such as extra paid vacations. This approach not only improves the quality of data entered into the system but also engages prison agents, turning them into active and committed participants in the accuracy of the system.
+
+- Choice of Token and Blockchain Technology
+
+The choice to implement the FDC token through an ERC-20 smart contract was guided by the need for a robust, scalable solution integrated into the Ethereum ecosystem. We used the rapid contract creation tool from [OpenZeppelin](https://www.openzeppelin.com/contracts). The FDC contract allows the minting of tokens directly related to the actions of the agents in the system, ensuring a fair and transparent distribution of rewards.
+The contract can be viewed below:
+```
+// SPDX-License-Identifier: MIT
+// Compatible with OpenZeppelin Contracts ^5.0.0
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract FDC is ERC20, ERC20Burnable, Ownable {
+    constructor(address initialOwner)
+        ERC20("FreedomChains", "FDC")
+        Ownable(initialOwner)
+    {}
+
+    function mint(address to, uint256 amount) public {
+        _mint(to, amount);
+    }
+}
+```
+
+
+# Freedom Chains
+
 ⚖️ Promovendo justiça e humanidade no sistema penal brasileiro, Freedom Chain oferece uma visão transparente, segura e anônima do histórico comportamental dos presos, fortalecendo o processo de ressocialização e garantindo os direitos da população carcerária.
 
 ⚙️ Solução desenvolvida usando NextJS, ReactJs, Typescript, Scroll
