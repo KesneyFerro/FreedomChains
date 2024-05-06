@@ -533,7 +533,33 @@ Para o desenvolvimento do back-end relacionado ao LLM, foram utilizadas as segui
 - **Blockchain**: Utilizado para armazenar de forma segura e imutável os comentários dos agentes penitenciários e os relatórios gerados pela IA.
 - **Banco de Dados**: Armazena os dados temporários e finais para processamento e consulta.
 
-A integração da inteligência artificial neste projeto de aplicação blockchain traz benefícios significativos ao automatizar o processo de geração de relatórios sobre detentos. Isso não só aumenta a eficiência operacional, mas também fornece insights valiosos para auxiliar nas decisões de gestão penitenciária. A IA contribui para uma abordagem mais proativa e informada no tratamento e acompanhamento dos detentos, promovendo melhores resultados de ressocialização e reintegração social
+A integração da inteligência artificial neste projeto de aplicação blockchain traz benefícios significativos ao automatizar o processo de geração de relatórios sobre detentos. Isso não só aumenta a eficiência operacional, mas também fornece insights valiosos para auxiliar nas decisões de gestão penitenciária. A IA contribui para uma abordagem mais proativa e informada no tratamento e acompanhamento dos detentos, promovendo melhores resultados de ressocialização e reintegração social.
+
+
+## 📍 Planos Futuros
+
+*Expansão da Cobertura Funcional:*
+- *Automatização do Acompanhamento Judicial:* Desenvolver funcionalidades que permitam o acompanhamento automático dos casos judiciais associados aos detentos, integrando com sistemas de tribunais para atualizações em tempo real.
+- *Gestão de Recursos Educacionais e de Trabalho:* Expandir o sistema para gerenciar e registrar atividades educacionais e de trabalho dos presos, incluindo cursos concluídos e habilidades adquiridas.
+
+*Integração com Outras Plataformas e Serviços:*
+- *APIs para Integração com ONGs e Serviços Sociais:* Permitir que organizações não governamentais e serviços sociais acessem informações sobre o progresso dos detentos para facilitar programas de reintegração.
+- *Conexão com Plataformas de Emprego:* Criar parcerias com plataformas de emprego para ajudar ex-detentos a encontrar trabalho pós-liberação.
+
+*Melhorias de Segurança e Privacidade:*
+- *Auditorias de Segurança Frequentes:* Implementar auditorias de segurança regulares para garantir que os dados dos detentos sejam mantidos seguros e privados.
+
+
+
+*Análise Avançada de Dados e IA:*
+- *Previsão de Ressocialização:* Utilizar modelos de machine learning para prever o sucesso da ressocialização com base no comportamento e engajamento dos detentos em atividades produtivas.
+- *Detecção de Anomalias:* Implementar algoritmos de detecção de anomalias para identificar automaticamente entradas de dados suspeitas ou inconsistências nos relatórios.
+
+*Expansão Geográfica:*
+- *Adaptação para Outros Sistemas Jurídicos:* Adaptação do software para ser compatível com sistemas carcerários de outros países, considerando suas leis e regulamentações específicas.
+
+
+
 
 `<a name="ondeOlharNoCodigo"></a>`
 
