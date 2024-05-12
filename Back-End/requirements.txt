@@ -3,4 +3,4 @@ openai[all]
 pypandoc[all]
 pydantic[all]
 pdflatex[all]
-weasyprint==52.5[all]
+weasyprint==52.5
