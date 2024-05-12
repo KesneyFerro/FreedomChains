@@ -1,8 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from LLM.AI import generate_guard_comments, generate_detainee_report
-from LLM.markdown_to_pdf import convert_to_pdf
+from LLM.html_to_pdf import generate_pdf_from_html
 from pydantic import BaseModel
 import os
 
@@ -24,17 +24,15 @@ app.add_middleware(
 
 @app.post("/historico/json")
 async def get_historico_json(data: MyData):
-    # data:
-    # - id_detento
-    # - histórico de comentários
     relatorio_json = generate_guard_comments(data)
     return relatorio_json
 
 @app.post("/historico/pdf")
 async def get_historico_pdf(data: MyData):
     relatorio_json = await get_historico_json(data)
-    detainee_report = generate_detainee_report(relatorio_json)
+    html_detainee_report = generate_detainee_report(relatorio_json)
 
+<<<<<<< Updated upstream
     id_detento = data.id_detento
     historico = data.historico
     
@@ -58,3 +56,8 @@ async def get_historico_pdf(data: MyData):
 
     # file_path = f"./Reports/{file_name}"
     # return FileResponse(file_path)
+=======
+    pdf_bytes = generate_pdf_from_html(html_detainee_report)
+
+    return Response(content=pdf_bytes, media_type="application/pdf")
+>>>>>>> Stashed changes
