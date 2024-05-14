@@ -4,7 +4,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from LLM.AI import generate_guard_comments, generate_detainee_report
 from LLM.html_to_pdf import generate_pdf_from_html
 from pydantic import BaseModel
-import os
 
 class MyData(BaseModel):
     id_detento: str

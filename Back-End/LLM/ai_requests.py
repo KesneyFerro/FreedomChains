@@ -84,7 +84,7 @@ Preciso que você faça o comentário de 4 comentários diferentes e retorne os 
                 "content": prompt,
             }
         ],
-        model="gpt-4-turbo"
+        model="gpt-4"
     )
 
     return chat.choices[0].message.content
