@@ -32,6 +32,8 @@ async def get_historico_pdf(data: MyData):
     relatorio_json = await get_historico_json(data)
     html_detainee_report = generate_detainee_report(relatorio_json)
 
+    html_detainee_report = html_detainee_report.strip("```html").strip("```")
+
     pdf_bytes = generate_pdf_from_html(html_detainee_report)
 
     return Response(content=pdf_bytes, media_type="application/pdf")
